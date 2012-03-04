@@ -36,7 +36,7 @@ def gravatar(email, size=50, default='unknown.png'):
 
     return {
         'gravatar': {
-        'url': gravatar_url,
-        'size': size
+            'url': gravatar_url,
+            'size': size
         }
     }
