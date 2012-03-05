@@ -149,6 +149,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    
+    'lazysignup',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'lazysignup.backends.LazySignupBackend',
 )
 
 # A sample logging configuration. The only tangible logging
