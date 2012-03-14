@@ -1,4 +1,5 @@
 from django.views import generic as generic_views
+from django.conf import settings
 
 class HomeView(generic_views.TemplateView):
     template_name = 'home.html'
@@ -8,7 +9,9 @@ class HomeView(generic_views.TemplateView):
 
         context.update({
             'search_engine': 'Google',
-            'search_engine_logo': 'google_logo.png'
+            'search_engine_logo': 'google_logo.png',
+			'facebook_authentication_ID': settings.FACEBOOK_ID,
+			'facebook_script' : 'facebook.js',
         })
 
         return context
