@@ -8,5 +8,9 @@
 <div class="main">
     <p>{% blocktrans %}You have been logged out.{% endblocktrans %}</p>
     <a href="{% url home %}">{% trans "Home page" %}</a>
+    <p>{% blocktrans %} You will be redirect in 3 seconds. {% endblocktrans %}</p>
+    <script>
+        setTimeout("location.href = '{{ request.META.HTTP_REFERER }}';",3000);
+    </script>
 </div>
 {% endblock %}
