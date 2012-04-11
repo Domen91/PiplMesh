@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block body %}
 {% include "header.html" %}
 <div id="content">
+    {% if "q" in request.GET %}
+        <div id="google_query">{% trans "Query results for: " %}<b>{{ request.GET.q }}</b></div>
+    {% endif %}
     {% block content %}{% endblock %}
 </div>
 {% include "footer.html" %}
