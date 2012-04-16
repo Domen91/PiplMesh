@@ -94,6 +94,11 @@ td.gsc-clear-button {
     display: none !important;
 }
 
+#google_query {
+    margin-bottom: -100px;
+    margin-left: 125px;
+}
+
 /* -------------------- MAIN ------------------------ */
 #main {
     width: 960px;
