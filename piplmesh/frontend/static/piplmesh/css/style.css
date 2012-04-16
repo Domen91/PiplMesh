@@ -99,6 +99,10 @@ td.gsc-clear-button {
     margin-left: 125px;
 }
 
+.google_query_text {
+    font-weight: bold;
+}
+
 /* -------------------- MAIN ------------------------ */
 #main {
     width: 960px;

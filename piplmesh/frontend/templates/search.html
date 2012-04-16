@@ -6,7 +6,7 @@
 
 {% block content %}
     {% if "q" in request.GET %}
-    <div id="google_query">{% trans "Query results for:" %}&nbsp;<b>{{ request.GET.q }}</b></div>
+    <div id="google_query">{% trans "Query results for:" %} <span class="google_query_text">{{ request.GET.q }}</span></div>
     {% endif %}
     <div id="cse" class="result"></div>
     <script src="https://www.google.com/jsapi" type="text/javascript"></script>
