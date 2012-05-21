@@ -1,5 +1,4 @@
 #from tests import *
-
 from __future__ import absolute_import
 
 from django.utils import unittest
