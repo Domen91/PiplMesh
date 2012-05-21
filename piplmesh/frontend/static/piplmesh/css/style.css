@@ -206,6 +206,34 @@ input.gsc-search-button {
     text-shadow: none;
 }
 
+/* ---------------- TWITTER LOGIN BUTTON ------------------- */
+.twitter_login_button {
+    background: #3DBCDC url('../images/twitter_button.png');
+    background-position:  0 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 0 0 1px;
+    text-decoration: none;
+    outline: none;
+    font-size: 11px;
+    line-height: 14px;
+    margin: 0px;
+}
+
+.twitter_button_text {
+    background: #3DBCDC;
+    border-top: solid 1px #879AC0;
+    border-bottom: solid 1px #1A356E;
+    color: white;
+    display: block;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
+    padding: 2px 6px 3px 6px;
+    margin: 1px 1px 0 21px;
+    text-shadow: none;
+}
+
 /* --------------------- LOGIN ------------------------ */
 .login {
     text-align: center;
@@ -346,4 +374,57 @@ input.gsc-search-button {
     list-style-type: none;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+/* --------------------- PROFILE ------------------------ */
+#profile {
+    margin-left: 50%;
+    margin-top: 4%;
+    display: inline-block;
+    text-align: center;
+}
+
+#menu_list {
+    text-align: left;
+    display: inline-block;
+    position: absolute;
+    margin-top: 5%;
+}
+
+#picture {
+    margin-left: 30%;
+    margin-top: 8%;
+    text-align: left;
+    display: inline-block;
+    position: absolute;
+}
+
+#current_item {
+    text-decoration: underline;
+}
+
+/* --------------------- ACCOUNT ------------------------ */
+
+#password_change {
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 42%;
+}
+
+.button_account {
+    padding-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.button_account input {
+    height: 25px;
+    width: 100px;
+}
+
+.button_account ul {
+    list-style-type: none;
+    overflow: hidden;
 }
