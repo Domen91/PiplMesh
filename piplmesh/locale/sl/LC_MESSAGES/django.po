@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: piplmesh\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: "Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
 "POT-Creation-Date: 2012-06-07 21:35+0200\n"
 "PO-Revision-Date: 2012-05-18 12:29+0100\n"
 "Last-Translator: Martin Jakomin <martin.jakomin@gmail.com>\n"
