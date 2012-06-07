@@ -62,5 +62,23 @@ $(document).ready(function () {
 
     $('#search_users').change(redrawUserList).keyup(redrawUserList);
 
-    redrawUserList();
+    redrawUserList();    
 });
+
+$(window).bind("load", function() {
+    $('#id_password2').keyup(function() { checkPassword(); });
+});
+
+function checkPassword() {
+    var pass1 = document.getElementById('id_password1');
+    var pass2 = document.getElementById('id_password2');
+
+    var goodColor = "#66cc66";
+    var badColor = "#ff6666";
+
+    if(pass1.value == pass2.value){
+        pass2.style.backgroundColor = goodColor;
+    } else {
+        pass2.style.backgroundColor = badColor;
+    }
+}
