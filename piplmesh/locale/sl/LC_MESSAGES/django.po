@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: piplmesh\n"
-"Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
-"POT-Creation-Date: 2012-05-31 00:06+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 21:35+0200\n"
 "PO-Revision-Date: 2012-05-18 12:29+0100\n"
 "Last-Translator: Martin Jakomin <martin.jakomin@gmail.com>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: .\account\forms.py:17 .\account\models.py:33
+#: .\account\forms.py:17 .\account\models.py:42
 msgid ""
 "Minimal of 4 characters and maximum of 30. Letters, digits and @/./+/-/_ "
 "only."
@@ -69,7 +69,7 @@ msgstr "Geslo (ponovi)"
 
 #: .\account\forms.py:46
 msgid "Enter the same password as above, for verification."
-msgstr "V izogib napakam ponovno vnesi isto geslo kot zgoraj."
+msgstr "V izogib napakam ponovno vnesi enako geslo kot zgoraj."
 
 #: .\account\forms.py:57
 msgid "The two password fields did not match."
@@ -85,7 +85,7 @@ msgstr "Za potrditev vnesi trenutno geslo."
 
 #: .\account\forms.py:82
 msgid "Your current password was incorrect."
-msgstr "Vnešeno geslo je bilo nepravilno."
+msgstr "Vnešeno geslo je nepravilno."
 
 #: .\account\forms.py:90
 msgid "First name"
@@ -107,7 +107,7 @@ msgstr "Spol"
 msgid "Birth date"
 msgstr "Datum rojstva"
 
-#: .\account\models.py:32
+#: .\account\models.py:41
 msgid "username"
 msgstr "uporabniško ime"
 
@@ -119,15 +119,15 @@ msgstr "Prijava uspešna."
 msgid "You have been successfully logged out."
 msgstr "Odjava uspešna."
 
-#: .\account\views.py:130
+#: .\account\views.py:260
 msgid "Registration has been successful."
 msgstr "Registracija je bila uspešna."
 
-#: .\account\views.py:155
+#: .\account\views.py:286
 msgid "Your account has been successfully updated."
 msgstr "Tvoj račun je bil uspešno posodobljen."
 
-#: .\account\views.py:186
+#: .\account\views.py:318
 msgid "Your password has been successfully changed."
 msgstr "Tvoje geslo je bilo uspešno posodobljeno."
 
@@ -167,15 +167,15 @@ msgstr "Facebook prijava"
 msgid "Login with Twitter"
 msgstr "Twitter prijava"
 
-#: .\account\templates\user\login.html.py:34 
+#: .\account\templates\user\login.html.py:34
 msgid "Login with Foursquare"
 msgstr "Foursquare prijava"
 
-#: .\account\templates\user\login.html.py:40 
+#: .\account\templates\user\login.html.py:40
 msgid "Login with Google"
 msgstr "Google prijava"
 
-#: .\account\templates\user\login.html.py:33
+#: .\account\templates\user\login.html.py:45
 #: .\account\templates\user\registration.html.py:9
 #: .\frontend\templates\header.html.py:46
 msgid "Register"
@@ -224,7 +224,7 @@ msgstr ""
 msgid ""
 "For accessing this site and using all features cookies in your browser must "
 "be enabled."
-msgstr ""
+msgstr "Za dostop do strani in uporabo vseh funkcij morajo biti piškotki v vašem brskalniku omogočeni."
 
 #: .\frontend\templates\404.html.py:5 .\frontend\templates\404.html.py:10
 msgid "404 Not Found"
