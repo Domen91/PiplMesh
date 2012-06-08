@@ -1,0 +1,12 @@
+{% extends "panel/panel.html" %}
+
+{% load i18n static sekizai_tags %}
+
+{% block content %}
+    {% addtoblock "css" %}<link href="{% static "piplmesh/panel/horoscope/panel.css" %}" rel="stylesheet" type="text/css" media="screen" />{% endaddtoblock %}
+    <div id="horoscope">
+        <span class="horoscope_info">{{ horoscope_mark }}</span><br />
+        <span class="horoscope_description">{{ horoscope_description }}</span> <br />
+        <span class="horoscope_url">{% trans "Source" %}: <a href="{{ horoscope_source }}">{{ horoscope_source }}</a></span>
+    </div>
+{% endblock %}
