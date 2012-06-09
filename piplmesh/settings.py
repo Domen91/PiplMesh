@@ -203,9 +203,9 @@ PUSH_SERVER = {
     ),
 }
 
-CHECK_ONLINE_USERS_INTERVAL = 10
-CLEAN_INACTIVE_USERS_INTERVAL = 1
-DELETE_LAZY_USER_AFTER_DAYS = 30
+CHECK_ONLINE_USERS_INTERVAL = 10 # seconds
+CLEAN_INACTIVE_USERS_INTERVAL = 1 # days
+LAZY_USER_EXPIRATION = 30 # days 
 
 CELERY_RESULT_BACKEND = 'mongodb'
 CELERY_MONGODB_BACKEND_SETTINGS = {
@@ -223,8 +223,8 @@ BROKER_PASSWORD = ''
 BROKER_VHOST = 'celery'
 
 CELERY_IMPORTS = (
-    'piplmesh.frontend.tasks',
     'piplmesh.account.tasks',
+    'piplmesh.frontend.tasks',
 )
 
 CELERYBEAT_SCHEDULE = {
