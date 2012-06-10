@@ -5,17 +5,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: piplmesh\n"
-"Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
-"POT-Creation-Date: 2012-05-31 00:06+0200\n"
-"PO-Revision-Date: 2012-05-18 12:29+0100\n"
-"Last-Translator: Martin Jakomin <martin.jakomin@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-10 15:49+0200\n"
+"PO-Revision-Date: 2012-06-10 15:50+0100\n"
+"Last-Translator: Domen <domen@cebulj.net>\n"
 "Language-Team: \n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3)\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3)\n"
 
 #: .\settings.py:45
 msgid "Slovenian"
@@ -45,10 +44,9 @@ msgstr ""
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: .\account\forms.py:17 .\account\models.py:33
-msgid ""
-"Minimal of 4 characters and maximum of 30. Letters, digits and @/./+/-/_ "
-"only."
+#: .\account\forms.py:17
+#: .\account\models.py:45
+msgid "Minimal of 4 characters and maximum of 30. Letters, digits and @/./+/-/_ only."
 msgstr "Najmanj 4 in največ 30 znakov. Samo črke, številke in @/./+/-/_ ."
 
 #: .\account\forms.py:19
@@ -87,27 +85,27 @@ msgstr "Za potrditev vnesi trenutno geslo."
 msgid "Your current password was incorrect."
 msgstr "Vnešeno geslo je bilo nepravilno."
 
-#: .\account\forms.py:90
+#: .\account\forms.py:92
 msgid "First name"
 msgstr "Ime"
 
-#: .\account\forms.py:91
+#: .\account\forms.py:93
 msgid "Last name"
 msgstr "Priimek"
 
-#: .\account\forms.py:92
+#: .\account\forms.py:94
 msgid "E-mail"
 msgstr "E-mail"
 
-#: .\account\forms.py:94
+#: .\account\forms.py:96
 msgid "Gender"
 msgstr "Spol"
 
-#: .\account\forms.py:101
+#: .\account\forms.py:103
 msgid "Birth date"
 msgstr "Datum rojstva"
 
-#: .\account\models.py:32
+#: .\account\models.py:44
 msgid "username"
 msgstr "uporabniško ime"
 
@@ -119,15 +117,15 @@ msgstr "Prijava uspešna."
 msgid "You have been successfully logged out."
 msgstr "Odjava uspešna."
 
-#: .\account\views.py:130
+#: .\account\views.py:249
 msgid "Registration has been successful."
 msgstr "Registracija je bila uspešna."
 
-#: .\account\views.py:155
+#: .\account\views.py:275
 msgid "Your account has been successfully updated."
 msgstr "Tvoj račun je bil uspešno posodobljen."
 
-#: .\account\views.py:186
+#: .\account\views.py:307
 msgid "Your password has been successfully changed."
 msgstr "Tvoje geslo je bilo uspešno posodobljeno."
 
@@ -167,16 +165,16 @@ msgstr "Facebook prijava"
 msgid "Login with Twitter"
 msgstr "Twitter prijava"
 
-#: .\account\templates\user\login.html.py:34 
+#: .\account\templates\user\login.html.py:34
 msgid "Login with Foursquare"
 msgstr "Foursquare prijava"
 
-#: .\account\templates\user\login.html.py:40 
+#: .\account\templates\user\login.html.py:40
 msgid "Login with Google"
 msgstr "Google prijava"
 
-#: .\account\templates\user\login.html.py:33
-#: .\account\templates\user\registration.html.py:9
+#: .\account\templates\user\login.html.py:45
+#: .\account\templates\user\registration.html.py:14
 #: .\frontend\templates\header.html.py:46
 msgid "Register"
 msgstr "Registriraj se"
@@ -185,7 +183,7 @@ msgstr "Registriraj se"
 msgid "Change Password"
 msgstr "Spremeni geslo"
 
-#: .\account\templates\user\registration.html.py:5
+#: .\account\templates\user\registration.html.py:10
 msgid "Registration"
 msgstr "Registracija"
 
@@ -197,7 +195,8 @@ msgstr "Slika uporabnika"
 msgid "File"
 msgstr "Datoteka"
 
-#: .\frontend\templates\403.html.py:5 .\frontend\templates\403.html.py:10
+#: .\frontend\templates\403.html.py:5
+#: .\frontend\templates\403.html.py:10
 msgid "403 Forbidden"
 msgstr "403 Prepovedano"
 
@@ -206,27 +205,19 @@ msgid "You don't have permission to access the page you requested."
 msgstr "Nimaš pravic za dostop do željene strani."
 
 #: .\frontend\templates\403.html.py:15
-msgid ""
-"You are seeing this message because this HTTPS site requires a 'Referer "
-"header' to be sent by your Web browser, but none was sent. This header is "
-"required for security reasons, to ensure that your browser is not being "
-"hijacked by third parties."
+msgid "You are seeing this message because this HTTPS site requires a 'Referer header' to be sent by your Web browser, but none was sent. This header is required for security reasons, to ensure that your browser is not being hijacked by third parties."
 msgstr ""
 
 #: .\frontend\templates\403.html.py:16
-msgid ""
-"If you have configured your browser to disable 'Referer' headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for 'same-"
-"origin' requests."
+msgid "If you have configured your browser to disable 'Referer' headers, please re-enable them, at least for this site, or for HTTPS connections, or for 'same-origin' requests."
 msgstr ""
 
 #: .\frontend\templates\403.html.py:18
-msgid ""
-"For accessing this site and using all features cookies in your browser must "
-"be enabled."
+msgid "For accessing this site and using all features cookies in your browser must be enabled."
 msgstr ""
 
-#: .\frontend\templates\404.html.py:5 .\frontend\templates\404.html.py:10
+#: .\frontend\templates\404.html.py:5
+#: .\frontend\templates\404.html.py:10
 msgid "404 Not Found"
 msgstr "404 Ne obstaja"
 
@@ -259,12 +250,7 @@ msgid "Logout"
 msgstr "Odjava"
 
 #: .\frontend\templates\outside.html.py:8
-msgid ""
-"You are accessing the site outside of the <i>wlan slovenija</i> open "
-"wireless network. Because of this your current location cannot be determined "
-"automatically and we have to determine it through your browser. By providing "
-"us with your location we will be able to deliver you relevant information "
-"about your surroundings."
+msgid "You are accessing the site outside of the <i>wlan slovenija</i> open wireless network. Because of this your current location cannot be determined automatically and we have to determine it through your browser. By providing us with your location we will be able to deliver you relevant information about your surroundings."
 msgstr ""
 
 #: .\frontend\templates\outside.html.py:11
@@ -278,18 +264,6 @@ msgstr "Išči"
 #: .\frontend\templates\search.html.py:9
 msgid "Results for:"
 msgstr "Rezultati za:"
-
-#: .\frontend\templates\userlist.html.py:4
-msgid "Show/Hide Users"
-msgstr "Prikaži/Skrij uporabnike"
-
-#: .\frontend\templates\userlist.html.py:4
-msgid "Online Users"
-msgstr "Povezani uporabniki"
-
-#: .\frontend\templates\userlist.html.py:7
-msgid "Search users"
-msgstr "Išči uporabnike"
 
 #: .\frontend\templates\debug\uploadform.html.py:5
 msgid "Upload form"
@@ -330,3 +304,22 @@ msgstr "Zadnja prijava:"
 #: .\frontend\templates\user\user.html.py:25
 msgid "Facebook link"
 msgstr "Facebook povezava"
+
+#: .\panels\dummy\panel.py:11
+msgid "Dummy panel"
+msgstr "Testna plošča"
+
+#: .\panels\map\panel.py:8
+msgid "Map"
+msgstr "Zemljevid"
+
+#: .\panels\onlineusers\panel.py:9
+msgid "Online users"
+msgstr "Povezani uporabniki"
+
+#: .\panels\onlineusers\templates\panel\onlineusers\panel.html.py:26
+msgid "Search users"
+msgstr "Išči uporabnike"
+
+#~ msgid "Show/Hide Users"
+#~ msgstr "Prikaži/Skrij uporabnike"
