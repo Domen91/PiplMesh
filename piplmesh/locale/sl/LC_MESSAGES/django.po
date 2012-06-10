@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: piplmesh\n"
-"Report-Msgid-Bugs-To: "Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
-"POT-Creation-Date: 2012-06-07 21:35+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
+"POT-Creation-Date: 2012-06-10 15:26+0200\n"
 "PO-Revision-Date: 2012-05-18 12:29+0100\n"
 "Last-Translator: Martin Jakomin <martin.jakomin@gmail.com>\n"
 "Language-Team: \n"
@@ -154,32 +154,42 @@ msgid "Change your password"
 msgstr "Spremeni svoje geslo"
 
 #: .\account\templates\user\login.html.py:5
-#: .\account\templates\user\login.html.py:12
+#: .\account\templates\user\login.html.py:13
 #: .\frontend\templates\header.html.py:45
 msgid "Login"
 msgstr "Prijavi se"
 
-#: .\account\templates\user\login.html.py:22
+#: .\account\templates\user\login.html.py:11
+msgid "Sign in to your account:"
+msgstr "Prijavi se s svojim računom:"
+
+#: .\account\templates\user\login.html.py:20
+msgid "Sign in using your account with:"
+msgstr "Prijavi se z obstoječim računom:"
+
+#: .\account\templates\user\login.html.py:25
 msgid "Login with Facebook"
 msgstr "Facebook prijava"
 
-#: .\account\templates\user\login.html.py:28
+#: .\account\templates\user\login.html.py:31
 msgid "Login with Twitter"
 msgstr "Twitter prijava"
 
-#: .\account\templates\user\login.html.py:34
+#: .\account\templates\user\login.html.py:39
 msgid "Login with Foursquare"
 msgstr "Foursquare prijava"
 
-#: .\account\templates\user\login.html.py:40
+#: .\account\templates\user\login.html.py:45
 msgid "Login with Google"
 msgstr "Google prijava"
 
-#: .\account\templates\user\login.html.py:45
-#: .\account\templates\user\registration.html.py:9
-#: .\frontend\templates\header.html.py:46
-msgid "Register"
-msgstr "Registriraj se"
+#: .\account\templates\user\login.html.py:52
+msgid "If you don't have an account "
+msgstr "Če nimaš računa "
+
+#: .\account\templates\user\login.html.py:52
+msgid "click here to register."
+msgstr "klikni sem za registracijo."
 
 #: .\account\templates\user\password_change.html.py:5
 msgid "Change Password"
@@ -188,6 +198,11 @@ msgstr "Spremeni geslo"
 #: .\account\templates\user\registration.html.py:5
 msgid "Registration"
 msgstr "Registracija"
+
+#: .\account\templates\user\registration.html.py:9
+#: .\frontend\templates\header.html.py:46
+msgid "Register"
+msgstr "Registriraj se"
 
 #: .\account\templates\user\user_image.html.py:3
 msgid "User image"
@@ -224,7 +239,9 @@ msgstr ""
 msgid ""
 "For accessing this site and using all features cookies in your browser must "
 "be enabled."
-msgstr "Piškotki v tvojem brskalniku morajo biti omogočeni za dostop in uporabo vseh funkcij strani."
+msgstr ""
+"Piškotki v tvojem brskalniku morajo biti omogočeni za dostop in uporabo vseh "
+"funkcij strani."
 
 #: .\frontend\templates\404.html.py:5 .\frontend\templates\404.html.py:10
 msgid "404 Not Found"
