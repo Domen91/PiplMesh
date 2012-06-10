@@ -224,7 +224,7 @@ msgstr ""
 msgid ""
 "For accessing this site and using all features cookies in your browser must "
 "be enabled."
-msgstr "Za dostop in uporabo vseh funkcij strani omogoči piškotke v tvojem brskalniku"
+msgstr "Piškotki v tvojem brskalniku morajo biti omogočeni za dostop in uporabo vseh funkcij strani."
 
 #: .\frontend\templates\404.html.py:5 .\frontend\templates\404.html.py:10
 msgid "404 Not Found"
