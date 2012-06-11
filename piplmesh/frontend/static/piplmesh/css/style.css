@@ -300,10 +300,6 @@ input.gsc-search-button {
     width: 163px;
 }
 
-.fb_login_button:hover {
-    background-position: -163px;
-}
-
 .fb_button_text {
     color: white;
     display: block;
@@ -312,6 +308,11 @@ input.gsc-search-button {
     padding: 4px 6px 3px 6px;
     margin: -3px 1px 0 21px;
     text-shadow: none;
+}
+
+.fb_login_button:hover {
+    text-decoration: underline;
+    color: white;
 }
 
 /* ---------------- TWITTER LOGIN BUTTON ------------------- */
@@ -328,13 +329,13 @@ input.gsc-search-button {
     line-height: 14px;
     margin: 0px;
     outline: none;
-    border: 0;
+    border: 1px solid #3DBCDC;
+    height: 21px;
+    width: 163px;
 }
 
 .twitter_button_text {
     background: #3DBCDC;
-    border-top: solid 1px #879AC0;
-    border-bottom: solid 1px #1A356E;
     color: white;
     display: block;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
@@ -342,6 +343,11 @@ input.gsc-search-button {
     padding: 2px 6px 3px 6px;
     margin: 1px 1px 0 21px;
     text-shadow: none;
+}
+
+.twitter_login_button:hover {
+    text-decoration: underline;
+    color: white;
 }
 
 /* ---------------- FOURSQUARE LOGIN BUTTON ------------------- */
@@ -355,40 +361,45 @@ input.gsc-search-button {
     font-size: 11px;
     line-height: 20px;
     border: 0;
-    height: 24px;
+    height: 22px;
+    width: 163px;
 }
 
 .foursquare_button_text {
+	text-align:center;
     background: #2090c6;
-    border-top: solid 1px #879AC0;
-    border-bottom: solid 1px #1A356E;
     color: white;
     display: block;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     font-weight: bold;
-    margin: 0 0 0 20px;
-    text-shadow: none;
+    margin-left: 25px;
+    text-shadow: none;    
+}
+
+.foursquare_login_button:hover {
+    text-decoration: underline;
+    color: white;
 }
 
 /* ---------------- GOOGLE LOGIN BUTTON ------------------- */
 .google_login_button {
     background: #0064D9 url('../images/google_button.png');
-    background-position: 0 0;
     background-repeat: no-repeat;
     cursor: pointer;
     display: inline-block;
-    padding: 0 0 0 1px;
+    padding: 0 0 0 4px;
     text-decoration: none;
     outline: none;
     font-size: 11px;
     line-height: 14px;
     margin: 0px;
+    border: 1px solid #0064D9;
+    height: 21px;
+    width: 163px;
 }
 
 .google_button_text {
     background: #0064D9;
-    border-top: solid 1px #879AC0;
-    border-bottom: solid 1px #1A356E;
     color: white;
     display: block;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
@@ -398,35 +409,54 @@ input.gsc-search-button {
     text-shadow: none;
 }
 
+.google_login_button:hover {
+    text-decoration: underline;
+    color: white;
+}
+
 /* --------------------- LOGIN ------------------------ */
 .login {
-    text-align: center;
+    text-align: right;
     margin: 20px 0px 20px 0px;
 }
 
 .login_form {
-    text-align: right;
+	text-align:left;
+	padding: 10px;
     display: inline-block;
+    margin-right: 50px;
 }
 
 #other_login_options {
-    margin-left: 50px;
-    display: inline-block;
-    text-align: left;
+	padding: 10px;
+    margin-right: 300px;
+    float:right;    
+    text-align: left;    
 }
 
 #other_login_options ul {
     margin: 0;
-    padding: 0;
+    padding: 0;    
 }
 
 #other_login_options li {
-    padding-top: 15px;
+    padding-top: 5px;
+    padding-left: 10px;
     list-style-type: none;
+    display: inline-block;
+}
+
+#main li {
+	list-style-type: none;
+	text-align:right;
+}
+
+#main p {
+	text-align:center;
 }
 
 .registration {
-    width: 960px;
+    width: 660px;
     margin: auto;
     margin-top: 50px;
 }
