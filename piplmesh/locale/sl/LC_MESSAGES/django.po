@@ -7,15 +7,14 @@ msgstr ""
 "Project-Id-Version: piplmesh\n"
 "Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
 "POT-Creation-Date: 2012-06-11 00:22+0200\n"
-"PO-Revision-Date: 2012-05-18 12:29+0100\n"
-"Last-Translator: Martin Jakomin <martin.jakomin@gmail.com>\n"
+"PO-Revision-Date: 2012-06-11 09:37+0100\n"
+"Last-Translator: Domen <domen@cebulj.net>\n"
 "Language-Team: \n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3)\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3)\n"
 
 #: settings.py:45
 msgid "Slovenian"
@@ -45,10 +44,9 @@ msgstr ""
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: account/forms.py:17 account/models.py:58
-msgid ""
-"Minimal of 4 characters and maximum of 30. Letters, digits and @/./+/-/_ "
-"only."
+#: account/forms.py:17
+#: account/models.py:58
+msgid "Minimal of 4 characters and maximum of 30. Letters, digits and @/./+/-/_ only."
 msgstr "Najmanj 4 in največ 30 znakov. Samo črke, številke in @/./+/-/_ ."
 
 #: account/forms.py:19
@@ -112,8 +110,7 @@ msgid "Confirmation token"
 msgstr "Potrditvena koda"
 
 #: account/forms.py:151
-msgid ""
-"Please enter the confirmation token you received to your e-mail address."
+msgid "Please enter the confirmation token you received to your e-mail address."
 msgstr "Prosimo vnesi potrditveno kodo, ki si jo prejel na svoj e-mail naslov."
 
 #: account/forms.py:165
@@ -189,14 +186,8 @@ msgstr "Pozdravljen/a %(username)s!"
 
 #: account/templates/user/confirmation_email.txt:3
 #, python-format
-msgid ""
-"This message was sent to you to confirm this e-mail address (%(email)s) as "
-"yours for your account on %(SITE_NAME)s with username \"%(username)s\". If "
-"you have already done so or don't want to, you can safely ignore this e-mail."
-msgstr ""
-"To sporočilo ti je bilo poslano, da potrdiš ta e-mail naslov (%(email)s) kot "
-"svojega za %(SITE_NAME)s račun z uporabniškim imenom \"%(username)s\". Če si "
-"to že storil/a ali pa tega nočeš, lahko brez skrbi ignoriraš ta e-mail."
+msgid "This message was sent to you to confirm this e-mail address (%(email)s) as yours for your account on %(SITE_NAME)s with username \"%(username)s\". If you have already done so or don't want to, you can safely ignore this e-mail."
+msgstr "To sporočilo ti je bilo poslano, da potrdiš ta e-mail naslov (%(email)s) kot svojega za %(SITE_NAME)s račun z uporabniškim imenom \"%(username)s\". Če si to že storil/a ali pa tega nočeš, lahko brez skrbi ignoriraš ta e-mail."
 
 #: account/templates/user/confirmation_email.txt:5
 msgid "Please click the link below to confirm your e-mail address:"
@@ -207,44 +198,29 @@ msgid "Or, open the following link:"
 msgstr "Ali pa odpri naslednjo povezavo:"
 
 #: account/templates/user/confirmation_email.txt:13
-msgid ""
-"and copy-paste the following confirmation token into the input box there:"
+msgid "and copy-paste the following confirmation token into the input box there:"
 msgstr "in prilepi sledečo podtrditveno kodo v vnosno polje tam:"
 
 #: account/templates/user/confirmation_email.txt:17
 #, python-format
-msgid ""
-"Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s day."
-msgid_plural ""
-"Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s days."
+msgid "Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s day."
+msgid_plural "Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s days."
 msgstr[0] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
 msgstr[1] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dan."
 msgstr[2] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
 msgstr[3] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
 
 #: account/templates/user/confirmation_email.txt:17
-msgid ""
-" If it expires you will have to redo the process of confirming your e-mail "
-"address."
-msgstr ""
-"Če bo potekla, boš moral/a ponovno čez postopek potrditve svojega e-mail "
-"naslova."
+msgid " If it expires you will have to redo the process of confirming your e-mail address."
+msgstr "Če bo potekla, boš moral/a ponovno čez postopek potrditve svojega e-mail naslova."
 
 #: account/templates/user/confirmation_email.txt:19
-msgid ""
-"Please also be careful to open complete link. Your e-mail client might have "
-"broken it into several lines."
-msgstr ""
-"Prosimo bodi previden/a, da odpreš celotno povezavo. Tvoj e-mail odjemalec "
-"jo je morda razdelil v več vrstic."
+msgid "Please also be careful to open complete link. Your e-mail client might have broken it into several lines."
+msgstr "Prosimo bodi previden/a, da odpreš celotno povezavo. Tvoj e-mail odjemalec jo je morda razdelil v več vrstic."
 
 #: account/templates/user/confirmation_email.txt:21
-msgid ""
-"If you have any problems confirming your e-mail address or have any other "
-"questions just reply to this e-mail."
-msgstr ""
-"Če imaš karšnekoli težave pri potrjevanju svojega e-mail naslova ali kakšna "
-"druga vprašanja, lahko odgovoriš kar na ta e-mail."
+msgid "If you have any problems confirming your e-mail address or have any other questions just reply to this e-mail."
+msgstr "Če imaš karšnekoli težave pri potrjevanju svojega e-mail naslova ali kakšna druga vprašanja, lahko odgovoriš kar na ta e-mail."
 
 #: account/templates/user/confirmation_email.txt:23
 msgid "Yours,"
@@ -257,13 +233,8 @@ msgid "Confirm your e-mail address"
 msgstr "Potrdi svoj e-mail naslov"
 
 #: account/templates/user/email_confirmation_process_token.html:13
-msgid ""
-"You are just one step away from confirming your e-mail address. If for some "
-"reason the input box below is empty, paste the token in manually from the "
-"confirmation e-mail you have received."
-msgstr ""
-"Si samo še korak od potrditve svojega e-mail naslova. Če je spodnje vnosno "
-"polje slučajno prazno, ročno prilepi kodo, ki si jo prejel/a."
+msgid "You are just one step away from confirming your e-mail address. If for some reason the input box below is empty, paste the token in manually from the confirmation e-mail you have received."
+msgstr "Si samo še korak od potrditve svojega e-mail naslova. Če je spodnje vnosno polje slučajno prazno, ročno prilepi kodo, ki si jo prejel/a."
 
 #: account/templates/user/email_confirmation_send_token.html:5
 msgid "E-mail address confirmation"
@@ -283,16 +254,11 @@ msgid "Why should I confirm my e-mail address?"
 msgstr "Zakaj bi potrdil svoj e-mail naslov?"
 
 #: account/templates/user/email_confirmation_send_token.html:23
-msgid ""
-"Confirming your e-mail address improves the security of your account. Once "
-"you've confirmed your e-mail address, you will be able to reset your "
-"password in the case you lost it or forget it."
-msgstr ""
-"Potrditev svojega e-mail naslova poveča varnost tvojega računa. Ko boš "
-"potrdil svoj e-mail naslov, boš lahko resetiral/a svoje geslo v primeru, da "
-"si ga pozabil/a ali izgubil/a."
+msgid "Confirming your e-mail address improves the security of your account. Once you've confirmed your e-mail address, you will be able to reset your password in the case you lost it or forget it."
+msgstr "Potrditev svojega e-mail naslova poveča varnost tvojega računa. Ko boš potrdil svoj e-mail naslov, boš lahko resetiral/a svoje geslo v primeru, da si ga pozabil/a ali izgubil/a."
 
-#: account/templates/user/login.html:5 account/templates/user/login.html:12
+#: account/templates/user/login.html:5
+#: account/templates/user/login.html:12
 #: frontend/templates/header.html:45
 msgid "Login"
 msgstr "Prijavi se"
@@ -335,7 +301,8 @@ msgstr "Slika uporabnika"
 msgid "File"
 msgstr "Datoteka"
 
-#: frontend/templates/403.html:5 frontend/templates/403.html.py:10
+#: frontend/templates/403.html:5
+#: frontend/templates/403.html.py:10
 msgid "403 Forbidden"
 msgstr "403 Prepovedano"
 
@@ -344,27 +311,19 @@ msgid "You don't have permission to access the page you requested."
 msgstr "Nimaš pravic za dostop do željene strani."
 
 #: frontend/templates/403.html:15
-msgid ""
-"You are seeing this message because this HTTPS site requires a 'Referer "
-"header' to be sent by your Web browser, but none was sent. This header is "
-"required for security reasons, to ensure that your browser is not being "
-"hijacked by third parties."
+msgid "You are seeing this message because this HTTPS site requires a 'Referer header' to be sent by your Web browser, but none was sent. This header is required for security reasons, to ensure that your browser is not being hijacked by third parties."
 msgstr ""
 
 #: frontend/templates/403.html:16
-msgid ""
-"If you have configured your browser to disable 'Referer' headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for 'same-"
-"origin' requests."
+msgid "If you have configured your browser to disable 'Referer' headers, please re-enable them, at least for this site, or for HTTPS connections, or for 'same-origin' requests."
 msgstr ""
 
 #: frontend/templates/403.html:18
-msgid ""
-"For accessing this site and using all features cookies in your browser must "
-"be enabled."
+msgid "For accessing this site and using all features cookies in your browser must be enabled."
 msgstr ""
 
-#: frontend/templates/404.html:5 frontend/templates/404.html.py:10
+#: frontend/templates/404.html:5
+#: frontend/templates/404.html.py:10
 msgid "404 Not Found"
 msgstr "404 Ne obstaja"
 
@@ -397,12 +356,7 @@ msgid "Logout"
 msgstr "Odjava"
 
 #: frontend/templates/outside.html:8
-msgid ""
-"You are accessing the site outside of the <i>wlan slovenija</i> open "
-"wireless network. Because of this your current location cannot be determined "
-"automatically and we have to determine it through your browser. By providing "
-"us with your location we will be able to deliver you relevant information "
-"about your surroundings."
+msgid "You are accessing the site outside of the <i>wlan slovenija</i> open wireless network. Because of this your current location cannot be determined automatically and we have to determine it through your browser. By providing us with your location we will be able to deliver you relevant information about your surroundings."
 msgstr ""
 
 #: frontend/templates/outside.html:11
@@ -459,11 +413,11 @@ msgstr "Facebook povezava"
 
 #: panels/dummy/panel.py:11
 msgid "Dummy panel"
-msgstr ""
+msgstr "Testna ploščica"
 
 #: panels/map/panel.py:8
 msgid "Map"
-msgstr ""
+msgstr "Zemljevid"
 
 #: panels/onlineusers/panel.py:9
 msgid "Online users"
@@ -472,3 +426,4 @@ msgstr "Povezani uporabniki"
 #: panels/onlineusers/templates/panel/onlineusers/panel.html:26
 msgid "Search users"
 msgstr "Išči uporabnike"
+

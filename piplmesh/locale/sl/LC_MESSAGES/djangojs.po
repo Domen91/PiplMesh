@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: piplmesh\n"
 "Report-Msgid-Bugs-To: https://github.com/wlanslovenija/PiplMesh\n"
 "POT-Creation-Date: 2012-05-24 15:16+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Jon Premik <jon.premik@gmail.com>\n"
+"PO-Revision-Date: 2012-06-11 09:39+0100\n"
+"Last-Translator: Domen <domen@cebulj.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,3 +19,20 @@ msgstr ""
 #: frontend/static/piplmesh/js/home.js:23
 msgid "User image"
 msgstr "Slika uporabnika"
+
+#: account/static/piplmesh/js/registration.js:20
+msgid "Passwords do not match."
+msgstr "Gesli se ne ujemata."
+
+#: account/static/piplmesh/js/registration.js:54
+msgid "Invalid e-mail."
+msgstr "Napačen e-mail."
+
+#: panels/map/static/piplmesh/panel/map/panel.js:15
+msgid "more info"
+msgstr "več informacij"
+
+#: panels/onlineusers/static/piplmesh/panel/onlineusers/panel.js:35
+msgid "User profile"
+msgstr "Uporabniški profil"
+
