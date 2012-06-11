@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piplmesh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 15:49+0200\n"
-"PO-Revision-Date: 2012-06-10 15:50+0100\n"
+"POT-Creation-Date: 2012-06-11 08:28+0200\n"
+"PO-Revision-Date: 2012-06-11 08:30+0100\n"
 "Last-Translator: Domen <domen@cebulj.net>\n"
 "Language-Team: \n"
 "Language: sl\n"
@@ -307,7 +307,7 @@ msgstr "Facebook povezava"
 
 #: .\panels\dummy\panel.py:11
 msgid "Dummy panel"
-msgstr "Testna plošča"
+msgstr "Testna ploščica"
 
 #: .\panels\map\panel.py:8
 msgid "Map"
