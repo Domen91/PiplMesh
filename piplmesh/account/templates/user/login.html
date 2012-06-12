@@ -5,7 +5,7 @@
 {% block title %}{% trans "Login" %}{% endblock %}
 
 {% block content %}
-    <div id="main">
+	<div id="main">
         <div class="login">
             <div class="login_form">
 				{% trans "Sign in to your account:" %}
@@ -17,7 +17,7 @@
             </div>
             <div id="other_login_options">
 				<ul>
-				{% trans "Sign in using your account with:" %}
+					{% trans "Sign in using your account with:" %}
 					<ul>
 						<li>
 							<form method="post" action="{% url facebook_login %}" id="fb_login_form2">
