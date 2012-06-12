@@ -154,23 +154,16 @@ msgstr "Uspešno si potrdil svoj e-mail naslov."
 
 #: .\account\templates\user\account.html.py:5
 #: .\account\templates\user\account.html.py:10
-#: .\account\templates\user\email_confirmation_process_token.html.py:10
-#: .\account\templates\user\email_confirmation_send_token.html.py:10
-#: .\account\templates\user\password_change.html.py:10
 #: .\frontend\templates\user\user.html.py:11
 msgid "Account"
 msgstr "Račun"
 
 #: .\account\templates\user\account.html.py:9
-#: .\account\templates\user\email_confirmation_process_token.html.py:9
-#: .\account\templates\user\email_confirmation_send_token.html.py:9
-#: .\account\templates\user\password_change.html.py:9
 #: .\frontend\templates\user\user.html.py:10
 msgid "Profile"
 msgstr "Profil"
 
 #: .\account\templates\user\account.html.py:13
-#: .\account\templates\user\password_change.html.py:13
 msgid "Submit"
 msgstr "Pošlji"
 
@@ -178,119 +171,10 @@ msgstr "Pošlji"
 msgid "Change your password"
 msgstr "Spremeni svoje geslo"
 
-#: .\account\templates\user\account.html.py:20
-msgid "Please confirm your e-mail address"
-msgstr "Prosimo, potrdi svoj e-mail naslov"
-
-#: .\account\templates\user\confirmation_email.txt.py:1
-#, python-format
-msgid "Hello %(username)s!"
-msgstr "Pozdravljen/a %(username)s!"
-
-#: .\account\templates\user\confirmation_email.txt.py:3
-#, python-format
-msgid ""
-"This message was sent to you to confirm this e-mail address (%(email)s) as "
-"yours for your account on %(SITE_NAME)s with username \"%(username)s\". If "
-"you have already done so or don't want to, you can safely ignore this e-mail."
-msgstr ""
-"To sporočilo ti je bilo poslano, da potrdiš ta e-mail naslov (%(email)s) kot "
-"svojega za %(SITE_NAME)s račun z uporabniškim imenom \"%(username)s\". Če si "
-"to že storil/a ali pa tega nočeš, lahko brez skrbi ignoriraš ta e-mail."
-
-#: .\account\templates\user\confirmation_email.txt.py:5
-msgid "Please click the link below to confirm your e-mail address:"
-msgstr "Klikni spodnjo povezavo za potrditev svojega e-mail naslova:"
-
-#: .\account\templates\user\confirmation_email.txt.py:9
-msgid "Or, open the following link:"
-msgstr "Ali pa odpri naslednjo povezavo:"
-
 #: .\account\templates\user\confirmation_email.txt.py:13
 msgid ""
 "and copy-paste the following confirmation token into the input box there:"
 msgstr "in prilepi sledečo podtrditveno kodo v vnosno polje tam:"
-
-#: .\account\templates\user\confirmation_email.txt.py:17
-#, python-format
-msgid ""
-"Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s day."
-msgid_plural ""
-"Confirmation token will be active for %(CONFIRMATION_TOKEN_VALIDITY)s days."
-msgstr[0] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
-msgstr[1] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dan."
-msgstr[2] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
-msgstr[3] "Potrditvena koda bo veljavna %(CONFIRMATION_TOKEN_VALIDITY)s dni."
-
-#: .\account\templates\user\confirmation_email.txt.py:17
-msgid ""
-" If it expires you will have to redo the process of confirming your e-mail "
-"address."
-msgstr ""
-"Če bo potekla, boš moral/a ponovno čez postopek potrditve svojega e-mail "
-"naslova."
-
-#: .\account\templates\user\confirmation_email.txt.py:19
-msgid ""
-"Please also be careful to open complete link. Your e-mail client might have "
-"broken it into several lines."
-msgstr ""
-"Prosimo bodi previden/a, da odpreš celotno povezavo. Tvoj e-mail odjemalec "
-"jo je morda razdelil v več vrstic."
-
-#: .\account\templates\user\confirmation_email.txt.py:21
-msgid ""
-"If you have any problems confirming your e-mail address or have any other "
-"questions just reply to this e-mail."
-msgstr ""
-"Če imaš karšnekoli težave pri potrjevanju svojega e-mail naslova ali kakšna "
-"druga vprašanja, lahko odgovoriš kar na ta e-mail."
-
-#: .\account\templates\user\confirmation_email.txt.py:23
-msgid "Yours,"
-msgstr "Tvoj,"
-
-#: .\account\templates\user\confirmation_email_subject.txt.py:1
-#: .\account\templates\user\email_confirmation_process_token.html.py:5
-#: .\account\templates\user\email_confirmation_process_token.html.py:16
-msgid "Confirm your e-mail address"
-msgstr "Potrdi svoj e-mail naslov"
-
-#: .\account\templates\user\email_confirmation_process_token.html.py:13
-msgid ""
-"You are just one step away from confirming your e-mail address. If for some "
-"reason the input box below is empty, paste the token in manually from the "
-"confirmation e-mail you have received."
-msgstr ""
-"Si samo še korak od potrditve svojega e-mail naslova. Če je spodnje vnosno "
-"polje slučajno prazno, ročno prilepi kodo, ki si jo prejel/a."
-
-#: .\account\templates\user\email_confirmation_send_token.html.py:5
-msgid "E-mail address confirmation"
-msgstr "Potrditev e-mail naslova"
-
-#: .\account\templates\user\email_confirmation_send_token.html.py:13
-#, python-format
-msgid "Clicking the button below will send a confirmation mail to %(email)s."
-msgstr "Klik na spodnji gumb bo poslal potrditveno povezavo na %(email)s."
-
-#: .\account\templates\user\email_confirmation_send_token.html.py:16
-msgid "Click here to confirm your e-mail address"
-msgstr "Klikni tukaj za potrditev svojega e-mail naslova"
-
-#: .\account\templates\user\email_confirmation_send_token.html.py:21
-msgid "Why should I confirm my e-mail address?"
-msgstr "Zakaj bi potrdil svoj e-mail naslov?"
-
-#: .\account\templates\user\email_confirmation_send_token.html.py:23
-msgid ""
-"Confirming your e-mail address improves the security of your account. Once "
-"you've confirmed your e-mail address, you will be able to reset your "
-"password in the case you lost it or forget it."
-msgstr ""
-"Potrditev svojega e-mail naslova poveča varnost tvojega računa. Ko boš "
-"potrdil svoj e-mail naslov, boš lahko resetiral/a svoje geslo v primeru, da "
-"si ga pozabil/a ali izgubil/a."
 
 #: .\account\templates\user\login.html.py:5
 #: .\account\templates\user\login.html.py:13
