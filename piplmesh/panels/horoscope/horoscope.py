@@ -4,108 +4,181 @@ from urllib import urlopen
 from xml.dom import minidom
 from xml.dom.minidom import parseString
 
+from django.db import models
+from mongoengine import *
+from mongoengine.django import *
+
+from piplmesh.panels.horoscope import models
+
+def get_horoscope_mark_string(mark):
+    """
+    Return translated horoscope marks.
+    """
+
+    horoscope_marks = [_("Aries"), _("Pisces"), _("Taurus"), _("gemini"), _("Cancer"), _("Leo"), _("Virgo"), _("Libra"), _("Scorpio"), _("Sagittarius"), _("Capricorn"), _("Aquarius")]
+    return horoscope_marks[mark]
+
+def get_horoscope_available_languages():
+    """
+    Return available horoscope languages.
+    If we create a new function for get horoscope in a new languages, we must add language in below list.
+    """
+
+    available_languages = ['en', 'sl']
+    return available_languages
+
 def get_horoscope_mark(day, month):
     """
-    Function return translated horoscope mark.
+    Function return horoscope mark number.
+    Returnd numbers:
+        0 - Aries
+        1 - Pisces
+        2 - Taurus
+        3 - Gemini
+        4 - Cancer
+        5 - Leo
+        6 - Virgo
+        7 - Libra
+        8 - Scorpio
+        9 - Sagittarius
+        10 - Capricon
+        11 - Aquarius
     """
 
     if month == 3:
         if day > 20:
-            return _("Aries")
+            return 0
         else:
-            return _("Pisces")
+            return 1
     elif month == 4:
         if day > 20:
-            return _("Taurus")
+            return 2
         else:
-            return _("Aries")
+            return 0
     elif month == 5:
         if day > 21:
-            return _("Gemini")
+            return 3
         else:
-            return _("Taurus")
+            return 2
     elif month == 6:
         if day > 21:
-            return _("Cancer")
+            return 4
         else:
-            return _("Gemini")
+            return 3
     elif month == 7:
         if day > 23:
-            return _("Leo")
+            return 5
         else:
-            return _("Cancer")
+            return 4
     elif month == 8:
         if day > 23:
-            return _("Virgo")
+            return 6
         else:
-            return _("Leo")
+            return 5
     elif month == 9:
         if day > 23:
-            return _("Libra")
+            return 7
         else:
-            return _("Virgo")
+            return 6
     elif month == 10:
         if day > 23:
-            return _("Scorpio")
+            return 8
         else:
-            return _("Libra")
+            return 7
     elif month == 11:
         if day > 22:
-            return _("Sagittarius")
+            return 9
         else:
-            return _("Scorpio")
+            return 8
     elif month == 12:
         if day > 22:
-            return _("Capricon")
+            return 10
         else:
-            return _("Sagittarius")
+            return 9
     elif month == 1:
         if day < 20:
-            return _("Aquarius")
+            return 11
         else:
-            return _("Capricon")
+            return 10
     elif month == 2:
         if day > 19:
-            return _("Pisces")
+            return 1
         else:
-            return _("Aquarius")
+            return 11
 
-def get_daily_english_horoscope(day, month):
+def get_daily_horoscope(user_object):
+    """
+    Return horoscope mark, description for today's horoscope and a source
+    """
+
+    user_language = user_object.language
+    
+    if user_object.birthdate:
+        day = user_object.birthdate.day
+        month = user_object.birthdate.month
+
+        user_mark = get_horoscope_mark(day, month)
+
+        horoscope = models.Horoscope.objects(
+            mark=user_mark,
+            language=user_language 
+        )
+
+        if horoscope:
+            horoscope = horoscope[0]
+            return (horoscope.description, get_horoscope_mark_string(user_mark), horoscope.source)
+        else:
+            (desc, user_mark, src) = celery_horoscope_update(user_mark, user_language)
+            try:
+                desc = desc.encode("utf-8")
+            except UnicodeError:
+                desc = unicode(desc, "utf-8")
+
+            models.Horoscope(language=user_language, mark=user_mark, description=desc, source=src).save()
+
+            return (desc, get_horoscope_mark_string(user_mark), src)
+
+    return (_("Error getting horoscope."), _("None"), "")
+
+def celery_horoscope_update(mark, lang):
+    """
+    Function returned horoscope from source site.
+    If we create a new function for get horoscope in a new languages, we must add a if statmenet below.
+    """
+
+    if lang == 'sl':
+        return get_daily_slovene_horoscope(mark)
+
+    return get_daily_english_horoscope(mark)
+
+def get_daily_english_horoscope(mark):
     """
     Daily english horoscope from http://findyourfate.com
     """
 
-    # Used _proxy___args[0] otherwise return an error
-    mark = get_horoscope_mark(day, month)._proxy____args[0]
+    request_mark = ['Aries', 'Pisces', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius']
+
     source = "http://findyourfate.com"
-    source_xml = "%s/rss/dailyhoroscope-feed.asp?sign=%s" % (source, mark)
+    source_xml = "%s/rss/dailyhoroscope-feed.asp?sign=%s" % (source, request_mark[mark])
 
     url_xml_open = urlopen(source_xml)
     horoscope_xml = url_xml_open.read()
+
     description = parseString(horoscope_xml).getElementsByTagName('description')[1].toxml()
     description = description.replace('<description>', '').replace('</description>', '')
     url_xml_open.close()
 
     return (description, mark, source)
 
-def get_daily_slovene_horoscope(day, month):
+def get_daily_slovene_horoscope(mark):
     """
-    Daily slovenian horoscope from http://slovenskenovice
+    Daily slovenian horoscope from http://slovenskenovice.si
+    """
     
-    For working slovenian horoscope, you must translated horoscope mark to correct slovenian languages!
-    """
-
-    mark = get_horoscope_mark(day, month)
-    mark_decode = mark.lower()
-
-    # Get correct url name for parsing
-    if mark_decode[1:] == 'korpijon':
-        mark_decode='skorpijon'
-    elif mark_decode[0:4] == 'dvoj':
-        mark_decode='dvojcka'
+    request_mark = ['oven', 'ribi', 'bik', 'dvojcka', 'rak', 'lev', 'devica', 'tehtnica', 'skorpijon', 'strelec', 'kozorog', 'vodnar']
 
     source = "http://www.slovenskenovice.si"
-    source_xml = source + "/lifestyle/astro/%s" % mark_decode
+    source_xml = "%s/lifestyle/astro/%s" % (source, request_mark[mark])
     open_url = urlopen(source_xml)
 
     horoscope_xml = open_url.read()
@@ -118,20 +191,4 @@ def get_daily_slovene_horoscope(day, month):
     index_end = horoscope_xml.find(search_end_string)
     horoscope = horoscope_xml[index_start:index_end]
 
-    if len(horoscope) > 500:
-        return get_daily_english_horoscope(day, month)
     return (horoscope, mark, source)
-
-def get_daily_horoscope(user_object):
-    """
-    Return horoscope mark, description for today's horoscope and a source
-    """
-
-    language = user_object.language
-
-    day = user_object.birthdate.day
-    month = user_object.birthdate.month
-
-    if language == 'sl':
-        return get_daily_slovene_horoscope(day, month)
-    return get_daily_english_horoscope(day, month)

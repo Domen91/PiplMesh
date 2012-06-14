@@ -4,9 +4,13 @@
 
 {% block content %}
     {% addtoblock "css" %}<link href="{% static "piplmesh/panel/horoscope/panel.css" %}" rel="stylesheet" type="text/css" media="screen" />{% endaddtoblock %}
-    <div id="horoscope">
-        <span class="horoscope_info">{{ horoscope_mark }}</span><br />
-        <span class="horoscope_description">{{ horoscope_description }}</span> <br />
-        <span class="horoscope_url">{% trans "Source" %}: <a href="{{ horoscope_source }}">{{ horoscope_source }}</a></span>
-    </div>
+    {% if user.birthdate %}
+        <div id="horoscope">
+            <span class="horoscope_info">{{ horoscope_mark }}</span><br />
+            <span class="horoscope_description">{{ horoscope_description }}</span> <br />
+            <span class="horoscope_url">{% trans "Source" %}: <a href="{{ horoscope_source }}">{{ horoscope_source }}</a></span>
+        </div>
+    {% else %}
+        <span class="horoscope_nologin">{% trans "Please, login or register to see horoscope and set your birthdate." %}</span>
+    {% endif %}
 {% endblock %}

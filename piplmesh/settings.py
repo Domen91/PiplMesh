@@ -14,6 +14,8 @@ settings_dir = os.path.abspath(os.path.dirname(__file__))
 import djcelery
 djcelery.setup_loader()
 
+from celery.task.schedules import crontab
+
 # Dummy function, so that "makemessages" can find strings which should be translated.
 _ = lambda s: s
 
@@ -209,6 +211,7 @@ PUSH_SERVER = {
 }
 
 CHECK_ONLINE_USERS_INTERVAL = 10
+CHECK_FOR_NEW_HOROSCOPE = 6 # am every day
 
 CELERY_RESULT_BACKEND = 'mongodb'
 CELERY_MONGODB_BACKEND_SETTINGS = {
@@ -233,6 +236,11 @@ CELERYBEAT_SCHEDULE = {
     'check_online_users': {
         'task': 'piplmesh.frontend.tasks.check_online_users',
         'schedule': datetime.timedelta(seconds=CHECK_ONLINE_USERS_INTERVAL),
+        'args': (),
+    },
+    'update_horoscope': {
+        'task': 'piplmesh.frontend.tasks.update_horoscope',
+        'schedule': crontab(hour=CHECK_FOR_NEW_HOROSCOPE),
         'args': (),
     },
 }
