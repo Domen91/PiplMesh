@@ -298,11 +298,11 @@ msgid "Login"
 msgstr "Prijavi se"
 
 #: account/templates/user/login.html.py:11
-msgid "Sign in to your account:"
+msgid "Login to your account:"
 msgstr "Prijavi se s svojim računom:"
 
 #: account/templates/user/login.html.py:20
-msgid "Sign in using your account with:"
+msgid "Login using your existing account:"
 msgstr "Prijavi se z obstoječim računom:"
 
 #: account/templates/user/login.html:22
@@ -323,10 +323,8 @@ msgstr "Google prijava"
 
 #: account\templates\user\login.html.py:54
 #, python-format
-msgid ""
-"If you don't have an account <a href=\" %(the_url)s \"> click here to "
-"register.</a>"
-msgstr ""
+msgid "If you don't have an account <a href=\" %(the_url)s\"> click here to register.</a>"
+msgstr "Če nimaš računa <a href=\" %(the_url)s\"> klikni sem za registracijo."
 
 #: account/templates/user/login.html:45
 #: account/templates/user/registration.html:14
