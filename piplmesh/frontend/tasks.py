@@ -1,5 +1,4 @@
 import datetime
-import itertools
 
 from django.conf import settings
 from django.utils import timezone
@@ -10,9 +9,6 @@ from pushserver.utils import updates
 
 from piplmesh.account import models
 from piplmesh.frontend import views
-
-from piplmesh.panels.horoscope import horoscope
-from piplmesh.panels.horoscope.models import Horoscope
 
 CHECK_ONLINE_USERS_RECONNECT_TIMEOUT = 2 * settings.CHECK_ONLINE_USERS_INTERVAL
 
@@ -63,19 +59,3 @@ def check_online_users():
                     },
                 }
             )
-
-@task.task
-def update_horoscope():
-    # Get all new horoscope according to available languages and horoscope marks(current it is 12 marks)
-    for i_language, i_mark in itertools.product(horoscope.get_horoscope_available_languages(), range(12)):
-            # Get new horoscope
-            (desc, mark_number, src) = horoscope.celery_horoscope_update(i_mark, i_language)
-
-            try:
-                desc = desc.encode("utf-8")
-            except UnicodeError:
-                desc = unicode(desc, "utf-8")
-
-            # Try update, if failed insert a new object
-            if not Horoscope.objects(language=i_language, mark=i_mark).update(set__description=desc, set__source=src):
-                Horoscope(language=i_language, mark=i_mark, description=desc, source=src).save()
