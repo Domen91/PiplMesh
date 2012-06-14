@@ -321,13 +321,12 @@ msgstr "Foursquare prijava"
 msgid "Login with Google"
 msgstr "Google prijava"
 
-#: account/templates/user/login.html.py:52
-msgid "If you don't have an account "
-msgstr "Če nimaš računa "
-
-#: account/templates/user/login.html.py:52
-msgid "click here to register."
-msgstr "klikni sem za registracijo."
+#: account\templates\user\login.html.py:54
+#, python-format
+msgid ""
+"If you don't have an account <a href=\" %(the_url)s \"> click here to "
+"register.</a>"
+msgstr ""
 
 #: account/templates/user/login.html:45
 #: account/templates/user/registration.html:14

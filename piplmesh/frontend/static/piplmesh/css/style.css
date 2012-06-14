@@ -240,6 +240,7 @@ input.gsc-search-button {
 
 #main {
     overflow: hidden;
+    text-align: left;
 }
 
 .result {
@@ -318,7 +319,7 @@ input.gsc-search-button {
 /* ---------------- TWITTER LOGIN BUTTON ------------------- */
 .twitter_login_button {
     background: #3DBCDC url('../images/twitter_button.png');
-    background-position:  0 0;
+    background-position: 0 0;
     background-repeat: no-repeat;
     cursor: pointer;
     display: inline-block;
@@ -343,6 +344,7 @@ input.gsc-search-button {
     padding: 2px 6px 3px 6px;
     margin: 1px 1px 0 21px;
     text-shadow: none;
+    border: 0;
 }
 
 .twitter_login_button:hover {
@@ -373,7 +375,7 @@ input.gsc-search-button {
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     font-weight: bold;
     margin-left: 25px;
-    text-shadow: none;    
+    text-shadow: none;
 }
 
 .foursquare_login_button:hover {
@@ -430,13 +432,13 @@ input.gsc-search-button {
 #other_login_options {
     padding: 10px;
     margin-right: 300px;
-    float:right;    
-    text-align: left;    
+    float:right;
+    text-align: left;
 }
 
 #other_login_options ul {
     margin: 0;
-    padding: 0;    
+    padding: 0;
 }
 
 #other_login_options li {
@@ -451,7 +453,7 @@ input.gsc-search-button {
     text-align:right;
 }
 
-#main p {
+#login_text p {
     text-align:center;
 }
 
