@@ -1,35 +1,20 @@
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import smart_unicode
-
 from collections import defaultdict 
 from urllib import urlopen
+
 from xml.dom import minidom
 from xml.dom.minidom import parseString
 
 from django.db import models
-from mongoengine import *
-from mongoengine.django import *
+from django.utils.translation import ugettext_lazy as _
 
-from models import Horoscope
+from piplmesh.panels.horoscope.models import Horoscope
+from piplmesh.panels.horoscope.models import HOROSCOPE_SIGNS
 
-HOROSCOPE_SIGNS = {
-    'aries' : _("Aries"),
-    'pisces': _("Pisces"),
-    'taurus': _("Taurus"),
-    'gemini': _("Gemini"),
-    'cancer': _("Cancer"),
-    'leo': _("Leo"),
-    'virgo': _("Virgo"),
-    'libra': _("Libra"),
-    'scorpio': _("Scorpio"),
-    'sagittarius': _("Sagittarius"),
-    'capricorn': _("Capricorn"),
-    'aquarius': _("Aquarius"),
-}
+HOROSCOPE_SIGNS_DICT = dict(HOROSCOPE_SIGNS)
 
 def get_horoscope_sign(day, month):
     """
-    Function return horoscope sign key for map.
+    Based on date, returns horoscope sign key.
     """
 
     if month == 3:
@@ -93,62 +78,12 @@ def get_horoscope_sign(day, month):
         else:
             return 'aquarius'
 
-def get_daily_horoscope(user_object):
+def get_all_horoscopes():
     """
-    Return horoscope sign, description, date and a source depend on user information.
-    """
-
-    user_language = user_object.language
-
-    if user_object.birthdate and user_language in HoroscopeBase.get_list_of_languages():
-        day = user_object.birthdate.day
-        month = user_object.birthdate.month
-
-        user_sign = get_horoscope_sign(day, month)
-
-        horoscope = Horoscope.objects(
-            sign=user_sign,
-            language=user_language 
-        )
-
-        if horoscope:
-            horoscope = horoscope[0]
-            return (horoscope.description, HOROSCOPE_SIGNS[user_sign], horoscope.source, horoscope.date)
-        else:
-            (desc, user_sign, src, date) = HoroscopeBase.get_horoscope(user_language, user_sign)
-            insert_update_one_horoscope(user_language, desc, user_sign, src, date)
-
-            return (desc, HOROSCOPE_SIGNS[user_sign], src, date)
-
-    return ("", _("Error getting horoscope."), "", "")
-
-def update_all_horoscope():
-    """
-    Function for updating all languages avaiable horoscope.
+    Returns all avaiable horoscopes.
     """
 
-    for horoscope_object in HoroscopeBase.get_list_of_avaiable_horoscope():
-        for sign in map(lambda s: s, HOROSCOPE_SIGNS):
-            h_lang = horoscope_object().get_language()
-
-            (h_desc, h_sign, h_src, h_date) = horoscope_object().fetch_data(sign)
-
-            insert_update_one_horoscope(h_lang, h_desc, h_sign, h_src, h_date)
-
-def insert_update_one_horoscope(h_lang, h_desc, h_sign, h_src, h_date):
-    """
-    Update if exsits otherwise insert a new.
-    """
-
-    h_lang=smart_unicode(h_lang)
-    h_desc=smart_unicode(h_desc)
-    h_sign=smart_unicode(h_sign)
-    h_src=smart_unicode(h_src)
-    h_date=smart_unicode(h_date)
-
-    # Try update, if failed insert a new object
-    if not Horoscope.objects(language=h_lang, sign=h_sign).update(set__description=h_desc, set__source=h_src, set__date=h_date):
-        Horoscope(language=h_lang, sign=h_sign, description=h_desc, source=h_src, date=h_date).save()
+    return HOROSCOPES
 
 class HoroscopeBase(object):
     """
@@ -156,24 +91,28 @@ class HoroscopeBase(object):
     """
 
     @classmethod
-    def get_list_of_avaiable_horoscope(cls):
-        return HoroscopeBase.__subclasses__()
+    def get_supported_languages(cls):
+        """
+        Returns dict of supported languages.
+        """
 
-    @classmethod
-    def get_list_of_languages(cls):
         languages = []
-        for h_object in HoroscopeBase.__subclasses__():
-            language = h_object().get_language()
+        for object in HOROSCOPES:
+            language = object.get_language()
             if language not in languages:
                 languages.append(language)
         return languages
 
     @classmethod
     def get_horoscope(cls, language, sign):
-        for h_object in HoroscopeBase.__subclasses__():
-            h_language = h_object().get_language()
+        """
+        Returns horoscope data depend on languages and sign.
+        """
+
+        for object in HOROSCOPES:
+            h_language = object.get_language()
             if language == h_language:
-                return h_object().fetch_data(sign)
+                return object.fetch_data(sign)
 
 class EnglishHoroscope(HoroscopeBase):
     """
@@ -265,3 +204,8 @@ class SlovenianHoroscope(HoroscopeBase):
         horoscope = horoscope_xml[index_start:index_end]
 
         return (horoscope, sign, source, date)
+
+HOROSCOPES = (
+    EnglishHoroscope(),
+    SlovenianHoroscope(),
+)

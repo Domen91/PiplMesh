@@ -230,6 +230,7 @@ BROKER_VHOST = 'celery'
 
 CELERY_IMPORTS = (
     'piplmesh.frontend.tasks',
+    'piplmesh.panels.horoscope.tasks',
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -239,7 +240,7 @@ CELERYBEAT_SCHEDULE = {
         'args': (),
     },
     'update_horoscope': {
-        'task': 'piplmesh.frontend.tasks.update_horoscope',
+        'task': 'piplmesh.panels.horoscope.tasks.update_horoscope',
         'schedule': crontab(hour=CHECK_FOR_NEW_HOROSCOPE),
         'args': (),
     },
