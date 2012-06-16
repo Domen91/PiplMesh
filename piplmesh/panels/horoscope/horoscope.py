@@ -4,13 +4,9 @@ from urllib import urlopen
 from xml.dom import minidom
 from xml.dom.minidom import parseString
 
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from piplmesh.panels.horoscope import models
 
-from piplmesh.panels.horoscope.models import Horoscope
-from piplmesh.panels.horoscope.models import HOROSCOPE_SIGNS
-
-HOROSCOPE_SIGNS_DICT = dict(HOROSCOPE_SIGNS)
+HOROSCOPE_SIGNS_DICT = dict(models.HOROSCOPE_SIGNS)
 
 def get_horoscope_sign(day, month):
     """
@@ -78,54 +74,84 @@ def get_horoscope_sign(day, month):
         else:
             return 'aquarius'
 
-def get_all_horoscopes():
+def get_all_horoscopes_providers():
     """
     Returns all avaiable horoscopes.
     """
 
-    return HOROSCOPES
+    return HOROSCOPE_PROVIDERS
 
-class HoroscopeBase(object):
+def get_horoscope_provider(language):
+    """
+    Returns an instance of the horoscope provider for requested language, or raises ``KeyError`` if it does not exist.
+    """
+
+    if language not in get_supported_languages():
+        raise KeyError("Unsupported language: '%s'" % language)
+    else:
+        for horoscope_instance in get_all_horoscopes_providers():
+            if horoscope_instance.get_language() == language:
+                return horoscope_instance
+
+def get_supported_languages():
+    """
+    Returns a list of supported languages (their language codes).
+
+    That is, a list of languages provided by defined horoscope providers.
+    """
+
+    languages = []
+    for object in get_all_horoscopes_providers():
+        language = object.get_language()
+        if language not in languages:
+            languages.append(language)
+    return languages
+
+def fetch_horoscope_data(language, sign):
+    """
+    Returns horoscope data depend on languages and sign.
+    """
+
+    for object in get_all_horoscopes_providers():
+        if language == object.get_language():
+            return object.fetch_data(sign)
+
+class HoroscopeProviderBase(object):
     """
     Parent class for defined horoscope methods for getting horoscope in your language.
     """
 
-    @classmethod
-    def get_supported_languages(cls):
+    def get_language(self):
         """
-        Returns dict of supported languages.
-        """
-
-        languages = []
-        for object in HOROSCOPES:
-            language = object.get_language()
-            if language not in languages:
-                languages.append(language)
-        return languages
-
-    @classmethod
-    def get_horoscope(cls, language, sign):
-        """
-        Returns horoscope data depend on languages and sign.
+        Returns provider language.
         """
 
-        for object in HOROSCOPES:
-            h_language = object.get_language()
-            if language == h_language:
-                return object.fetch_data(sign)
+        return self.language
 
-class EnglishHoroscope(HoroscopeBase):
+    def get_source_name(self):
+        """
+        Returns provider source name.
+        """
+
+        return self.source_name
+
+    def get_source_url(self, ):
+        """
+        Returns provider source url.
+        """
+
+        return self.source_url
+
+class EnglishHoroscope(HoroscopeProviderBase):
     """
     Daily english horoscope from http://findyourfate.com
     """
 
     language = 'en'
+    source_name = 'Find your fate'
+    source_url = 'http://findyourfate.com/rss/horoscope-feed.asp'
 
-    def get_language(self):
-        return self.language
-
-    def fetch_data(self, sign):
-        request_sign = {
+    request_sign = {
             'aries' : 'Aries',
             'pisces': 'Pisces',
             'taurus': 'Taurus',
@@ -140,33 +166,28 @@ class EnglishHoroscope(HoroscopeBase):
             'aquarius': 'Aquarius',
         }
 
-        source = "http://findyourfate.com"
-        source_xml = "%s/rss/dailyhoroscope-feed.asp?sign=%s" % (source, request_sign[sign])
-
-        url_xml_open = urlopen(source_xml)
-        horoscope_xml = url_xml_open.read()
+    def fetch_data(self, sign):
+        horoscope_url = 'http://findyourfate.com/rss/dailyhoroscope-feed.asp?sign=%s' % self.request_sign[sign]
+        horoscope_xml = urlopen(horoscope_url).read()
 
         date = parseString(horoscope_xml).getElementsByTagName('title')[1].toxml()
-        date = date.replace('<title>'+request_sign[sign]+' Horoscope for ', '').replace('</title>', '')
+        date = date.replace('<title>' + self.request_sign[sign] + ' Horoscope for ', '').replace('</title>', '')
 
         description = parseString(horoscope_xml).getElementsByTagName('description')[1].toxml()
         description = description.replace('<description>', '').replace('</description>', '')
-        url_xml_open.close()
 
-        return (description, sign, source, date)
+        return (description, sign, date)
 
-class SlovenianHoroscope(HoroscopeBase):
+class SlovenianHoroscope(HoroscopeProviderBase):
     """
     Daily slovenian horoscope from http://slovenskenovice.si
     """
 
     language = 'sl'
+    source_name = 'Slovenske novice'
+    source_url = 'http://www.slovenskenovice.si/lifestyle/astro/'
 
-    def get_language(self):
-        return self.language
-
-    def fetch_data(self, sign):
-        request_sign = {
+    request_sign = {
             'aries' : 'oven',
             'pisces': 'ribi',
             'taurus': 'bik',
@@ -181,11 +202,9 @@ class SlovenianHoroscope(HoroscopeBase):
             'aquarius': 'vodnar',
         }
 
-        source = "http://www.slovenskenovice.si"
-        source_xml = "%s/lifestyle/astro/%s" % (source, request_sign[sign])
-        open_url = urlopen(source_xml)
-
-        horoscope_xml = open_url.read()
+    def fetch_data(self, sign):
+        horoscope_url = '%s%s' % (self.source_url, self.request_sign[sign])
+        horoscope_xml = urlopen(horoscope_url).read()
 
         search_start_date = '<span class="views-label views-label-field-horoscope-content-general">HOROSKOP ZA '
         search_end_date = ': </span>    <strong class="field-content">'
@@ -201,11 +220,11 @@ class SlovenianHoroscope(HoroscopeBase):
         index_line = horoscope_xml.find(search_start_string)
         index_start = index_line+len(search_start_string)
         index_end = horoscope_xml.find(search_end_string)
-        horoscope = horoscope_xml[index_start:index_end]
+        description = horoscope_xml[index_start:index_end]
 
-        return (horoscope, sign, source, date)
+        return (description, sign, date)
 
-HOROSCOPES = (
+HOROSCOPE_PROVIDERS = (
     EnglishHoroscope(),
     SlovenianHoroscope(),
 )

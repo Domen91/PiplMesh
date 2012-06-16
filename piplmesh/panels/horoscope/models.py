@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 import mongoengine
-from mongoengine import Document
 
 HOROSCOPE_SIGNS = (
     ('aries', _("Aries")),
@@ -20,9 +19,8 @@ HOROSCOPE_SIGNS = (
     ('aquarius', _("Aquarius")),
 )
 
-class Horoscope(Document):
+class Horoscope(mongoengine.Document):
     sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS)
     language = mongoengine.StringField(choices=settings.LANGUAGES)
     description = mongoengine.StringField()
-    source = mongoengine.StringField()
     date = mongoengine.StringField()
