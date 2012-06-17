@@ -23,4 +23,4 @@ class Horoscope(mongoengine.Document):
     sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS)
     language = mongoengine.StringField(choices=settings.LANGUAGES)
     description = mongoengine.StringField()
-    date = mongoengine.StringField()
+    date = mongoengine.DateTimeField()

@@ -1,14 +1,13 @@
+from __future__ import absolute_import
+
 from celery import task
 
 from django.utils.encoding import smart_unicode
 
-from piplmesh.panels.horoscope import horoscope, models
+from . import horoscope, models
 
 @task.task
 def update_horoscope():
-    update_all_horoscope()
-
-def update_all_horoscope():
     """
     Function for updating all languages avaiable horoscope.
     """
@@ -29,7 +28,6 @@ def insert_update_one_horoscope(horoscope_language, horoscope_description, horos
     horoscope_language = smart_unicode(horoscope_language)
     horoscope_description = smart_unicode(horoscope_description)
     horoscope_sign = smart_unicode(horoscope_sign)
-    horoscope_date = smart_unicode(horoscope_date)
 
     # Try update, if failed insert a new object
     if not models.Horoscope.objects(language=horoscope_language, sign=horoscope_sign).update(set__description=horoscope_description, set__date=horoscope_date):

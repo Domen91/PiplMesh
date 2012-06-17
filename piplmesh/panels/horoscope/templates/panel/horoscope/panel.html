@@ -4,7 +4,7 @@
 
 {% block content %}
     {% addtoblock "css" %}<link href="{% static "piplmesh/panel/horoscope/panel.css" %}" rel="stylesheet" type="text/css" media="screen" />{% endaddtoblock %}
-    {% if user.birthdate %}
+    {% if user.is_authenticated %}
         <div id="horoscope">
             {% if horoscope_error %}
                 <span class="horoscope_description">{{ horoscope_error }}</span>
