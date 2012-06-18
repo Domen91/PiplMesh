@@ -2,7 +2,7 @@
     font-size: medium;
 }
 
-.horoscope_description {
+.horoscope_forecast {
     font-size: small;
 }
 
@@ -10,7 +10,7 @@
     font-size: xx-small;
 }
 
-.horoscope_nologin {
+.horoscope_error {
     font-size: x-small;
 }
 

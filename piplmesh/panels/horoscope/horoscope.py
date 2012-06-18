@@ -1,11 +1,12 @@
 from __future__ import absolute_import
 
-from datetime import datetime
-import re
+import datetime, re
 from urllib import urlopen
 
 from xml.dom import minidom
 from xml.dom.minidom import parseString
+
+from django.utils import encoding
 
 from . import models
 
@@ -103,15 +104,15 @@ def get_supported_languages():
     """
 
     languages = []
-    for object in get_all_horoscopes_providers():
-        language = object.get_language()
-        assert (language not in languages)
+    for horoscope in get_all_horoscopes_providers():
+        language = horoscope.get_language()
+        assert language not in languages, language
         languages.append(language)
     return languages
 
 class HoroscopeProviderBase(object):
     """
-    Parent class for defined horoscope methods for getting horoscope in your language.
+    Base class for horoscope providers.
     """
 
     language = None
@@ -120,88 +121,96 @@ class HoroscopeProviderBase(object):
 
     def get_language(self):
         """
-        Returns provider language.
+        Returns provider's language.
         """
 
         return self.language
 
     def get_source_name(self):
         """
-        Returns provider source name.
+        Returns provider's source name.
         """
 
         return self.source_name
 
     def get_source_url(self, ):
         """
-        Returns provider source url.
+        Returns provider's source URL.
         """
 
         return self.source_url
 
+    def fetch_data(self, sign):
+        return NotImplemented
+
 class EnglishHoroscope(HoroscopeProviderBase):
     """
-    Daily english horoscope from http://findyourfate.com
+    Daily english horoscope from http://findyourfate.com.
     """
 
     language = 'en'
     source_name = 'Find your fate'
     source_url = 'http://findyourfate.com/'
 
-    request_sign = {
-            'aries': 'Aries',
-            'pisces': 'Pisces',
-            'taurus': 'Taurus',
-            'gemini': 'Gemini',
-            'cancer': 'Cancer',
-            'leo': 'Leo',
-            'virgo': 'Virgo',
-            'libra': 'Libra',
-            'scorpio': 'Scorpio',
-            'sagittarius': 'Sagittarius',
-            'capricorn': 'Capricorn',
-            'aquarius': 'Aquarius',
-        }
+    provider_sign_names = {
+        'aries': 'Aries',
+        'pisces': 'Pisces',
+        'taurus': 'Taurus',
+        'gemini': 'Gemini',
+        'cancer': 'Cancer',
+        'leo': 'Leo',
+        'virgo': 'Virgo',
+        'libra': 'Libra',
+        'scorpio': 'Scorpio',
+        'sagittarius': 'Sagittarius',
+        'capricorn': 'Capricorn',
+        'aquarius': 'Aquarius',
+    }
 
     def fetch_data(self, sign):
-        horoscope_url = '%srss/dailyhoroscope-feed.asp?sign=%s' % (self.source_url, self.request_sign[sign])
+        horoscope_url = '%srss/dailyhoroscope-feed.asp?sign=%s' % (self.source_url, self.provider_sign_names[sign])
         horoscope_xml = urlopen(horoscope_url).read()
 
         date_string = parseString(horoscope_xml).getElementsByTagName('title')[1].toxml()
-        date_string = date_string.replace('<title>' + self.request_sign[sign] + ' Horoscope for ', '').replace('</title>', '')
+        date_string = date_string.replace('<title>' + self.provider_sign_names[sign] + ' Horoscope for ', '').replace('</title>', '')
 
-        date = datetime.strptime(date_string, '%A, %B %d, %Y')
+        date = datetime.datetime.strptime(date_string, '%A, %B %d, %Y')
 
-        description = parseString(horoscope_xml).getElementsByTagName('description')[1].toxml()
-        description = description.replace('<description>', '').replace('</description>', '')
+        forecast = parseString(horoscope_xml).getElementsByTagName('description')[1].toxml()
+        forecast = forecast.replace('<description>', '').replace('</description>', '')
 
-        return (description, sign, date)
+        return {
+            'date': date,
+            'forecast': encoding.smart_unicode(forecast),
+            'sign': encoding.smart_unicode(sign),
+            'language': encoding.smart_unicode(self.language),
+        }
 
 class SlovenianHoroscope(HoroscopeProviderBase):
     """
-    Daily slovenian horoscope from http://slovenskenovice.si
+    Daily slovenian horoscope from http://slovenskenovice.si.
     """
 
     language = 'sl'
     source_name = 'Slovenske novice'
     source_url = 'http://www.slovenskenovice.si/'
 
-    request_sign = {
-            'aries': 'oven',
-            'pisces': 'ribi',
-            'taurus': 'bik',
-            'gemini': 'dvojcka',
-            'cancer': 'rak',
-            'leo': 'lev',
-            'virgo': 'devica',
-            'libra': 'tehtnica',
-            'scorpio': 'skorpijon',
-            'sagittarius': 'strelec',
-            'capricorn': 'kozorog',
-            'aquarius': 'vodnar',
-        }
+    provider_sign_names = {
+        'aries': 'oven',
+        'pisces': 'ribi',
+        'taurus': 'bik',
+        'gemini': 'dvojcka',
+        'cancer': 'rak',
+        'leo': 'lev',
+        'virgo': 'devica',
+        'libra': 'tehtnica',
+        'scorpio': 'skorpijon',
+        'sagittarius': 'strelec',
+        'capricorn': 'kozorog',
+        'aquarius': 'vodnar',
+    }
 
-    months_names = {
+    provider_month_names = {
         'januar': 'January',
         'februar': 'February',
         'marec': 'March',
@@ -217,7 +226,7 @@ class SlovenianHoroscope(HoroscopeProviderBase):
     }
 
     def fetch_data(self, sign):
-        horoscope_url = '%slifestyle/astro/%s' % (self.source_url, self.request_sign[sign])
+        horoscope_url = '%slifestyle/astro/%s' % (self.source_url, self.provider_sign_names[sign])
         horoscope_xml = urlopen(horoscope_url).read()
 
         search_start_date = '<span class="views-label views-label-field-horoscope-content-general">HOROSKOP ZA '
@@ -229,10 +238,10 @@ class SlovenianHoroscope(HoroscopeProviderBase):
         date_string_html = horoscope_xml[index_start_date:index_end_date]
         date_string_day = re.sub(r'\D', '', date_string_html)
         date_string_month = re.sub('^[0-9\. ]+', '', date_string_html)
-        date_string_year = datetime.now().year
-        date_string = '%s. %s %s' % (date_string_day, self.months_names[date_string_month], date_string_year)
+        date_string_year = datetime.datetime.now().year
+        date_string = '%s. %s %s' % (date_string_day, self.provider_month_names[date_string_month], date_string_year)
 
-        date = datetime.strptime(date_string, '%d. %B %Y')
+        date = datetime.datetime.strptime(date_string, '%d. %B %Y')
 
         search_start_string = '<strong class="field-content">'
         search_end_string = '</strong>  </div>  </div>'
@@ -240,9 +249,14 @@ class SlovenianHoroscope(HoroscopeProviderBase):
         index_line = horoscope_xml.find(search_start_string)
         index_start = index_line+len(search_start_string)
         index_end = horoscope_xml.find(search_end_string)
-        description = horoscope_xml[index_start:index_end]
+        forecast = horoscope_xml[index_start:index_end]
 
-        return (description, sign, date)
+        return {
+            'date': date,
+            'forecast': encoding.smart_unicode(forecast),
+            'sign': encoding.smart_unicode(sign),
+            'language': encoding.smart_unicode(self.language),
+        }
 
 HOROSCOPE_PROVIDERS = (
     EnglishHoroscope(),

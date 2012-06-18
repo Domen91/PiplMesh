@@ -20,7 +20,7 @@ HOROSCOPE_SIGNS = (
 )
 
 class Horoscope(mongoengine.Document):
-    sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS)
-    language = mongoengine.StringField(choices=settings.LANGUAGES)
-    description = mongoengine.StringField()
-    date = mongoengine.DateTimeField()
+    sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS, required=True)
+    language = mongoengine.StringField(choices=settings.LANGUAGES, required=True)
+    forecast = mongoengine.StringField(required=True)
+    date = mongoengine.DateTimeField(required=True)
