@@ -48,11 +48,10 @@
                 </ul>
             </div>
         </div>
-        <div id="login_text">
-            <p>
-            {% url registration as the_url %}
-            {% blocktrans %}If you don't have an account<a href=" {{ the_url }} "> click here to register.</a>{% endblocktrans %}
-            </p>
+        <p>
+        {% url registration as the_url %}
+        {% blocktrans %}If you don't have an account<a href=" {{ the_url }} "> click here to register.</a>{% endblocktrans %}
+        </p>
         </div>
     </div>
 {% endblock %}
