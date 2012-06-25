@@ -12,10 +12,12 @@
                 <span class="horoscope_error">{% trans "Horoscope is unavailable in your language." %}</span>
             {% elif error_data %}
                 <span class="horoscope_error">{% trans "Horoscope data is temporarily unavailable." %}</span>
+            {% elif error_date %}
+                <span class="horoscope_error">{% trans "Horoscope forecast is too old." %}</span>
             {% else %}
                 <span class="horoscope_info">{{ horoscope_sign }}</span><br />
                 <span class="horoscope_forecast">{{ horoscope_forecast }}</span><br />
-                <span class="horoscope_date">{% trans "Date" %}: {{ horoscope_date }}</span><br />
+                <span class="horoscope_date">{% trans "Date" %}: {{ horoscope_date.day }}.{{ horoscope_date.month }}.{{ horoscope_date.year }}</span><br />
                 <span class="horoscope_url">{% trans "Source" %}: <a href="{{ horoscope_source_url }}">{{ horoscope_source_name }}</a></span>
             {% endif %}
         </div>
