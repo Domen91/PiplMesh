@@ -215,6 +215,7 @@ PUSH_SERVER = {
 }
 
 CHECK_ONLINE_USERS_INTERVAL = 10
+UPDATE_WEATHER = 10 #minutes
 
 CELERY_RESULT_BACKEND = 'mongodb'
 CELERY_MONGODB_BACKEND_SETTINGS = {
@@ -233,6 +234,7 @@ BROKER_VHOST = 'celery'
 
 CELERY_IMPORTS = (
     'piplmesh.frontend.tasks',
+    'piplmesh.panels.horoscope.tasks',
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -241,6 +243,11 @@ CELERYBEAT_SCHEDULE = {
         'schedule': datetime.timedelta(seconds=CHECK_ONLINE_USERS_INTERVAL),
         'args': (),
     },
+    'update_weather': {	
+        'task': 'piplmesh.panels.horoscope.tasks.update_weather',
+        'schedule': crontab(minutes=UPDATE_WEATHER),
+        'args': (),
+},
 }
 
 # A sample logging configuration. The only tangible logging

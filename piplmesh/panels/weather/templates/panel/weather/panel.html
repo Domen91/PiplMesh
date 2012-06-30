@@ -1,0 +1,39 @@
+{% extends "panel/panel.html" %}
+
+{% load i18n static sekizai_tags %}
+
+{% block content %}
+    {% addtoblock "css" %}<link href="{% static "piplmesh/panel/weather/panel.css" %}" rel="stylesheet" type="text/css" media="screen" />{% endaddtoblock %}
+  
+        <ul id="weather">
+            <li>
+                <ul>
+                    <li>
+                        <div>
+                            <span>{% trans date_current %}</span>
+                            {{ temperature_current }}°C
+                            <img src="http://api.yr.no/weatherapi/weathericon/1.0/?symbol={{ weathericon_current }};content_type=image/png" alt="weather icon" />
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span>{% trans date_tomorrow %}</span>
+                            {{ temperature_tomorrow }}°C
+                            <img src="http://api.yr.no/weatherapi/weathericon/1.0/?symbol={{ weathericon_tomorrow }};content_type=image/png" alt="weather icon" />
+                        </div>
+                    </li>
+                    <li class="last">
+                        <div>
+                            <span>{% trans date_after_tomorrow %}</span>
+                            {{ temperature_after_tomorrow }}°C
+                            <img src="http://api.yr.no/weatherapi/weathericon/1.0/?symbol={{ weathericon_after_tomorrow }};content_type=image/png" alt="weather icon" />
+                        </div>                
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>{% trans "Last update: " %}{{ date }}</p>
+            </li>
+        </ul>
+    
+{% endblock %}
