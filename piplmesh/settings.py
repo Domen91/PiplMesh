@@ -245,7 +245,7 @@ CELERYBEAT_SCHEDULE = {
     },
     'update_weather': {	
         'task': 'piplmesh.panels.horoscope.tasks.update_weather',
-        'schedule': crontab(minutes=UPDATE_WEATHER),
+        'schedule': datetime.timedelta(minutes=UPDATE_WEATHER),
         'args': (),
 },
 }

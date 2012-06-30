@@ -2,14 +2,13 @@ from __future__ import absolute_import
 
 from celery import task
 
-from . import weather, models
 from piplmesh.panels.weather import weather as weather_functions
 
+from . import weather, models
 
 @task.task
 def update_weather():
     for weather in models.Weather.objects:
-        print weather.weathericon_current
         weather_data = weather_functions.fetch_data(weather.latitude,weather.longitude)
         weather.update(
             set__date=str(weather_data['date']),
@@ -31,7 +30,6 @@ def insert_weather(lat,longitude):
     '''if weather for place not exist insert it'''
        
     if models.Weather.objects(latitude=str(lat),longitude=str(longitude)).count()==0:
-        print "weather inserted"
         weather_data = weather_functions.fetch_data(lat,longitude)
         models.Weather(
             date=weather_data['date'],

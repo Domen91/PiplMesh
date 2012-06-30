@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+from . import models
+
 from django import http
 from django.conf import settings
 from django.core import urlresolvers
@@ -7,10 +9,6 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from piplmesh import nodes, panels
-
-from . import weather, models
-
-'''zacasna'''
 from piplmesh.panels import weather
 
 class WeatherPanel(panels.BasePanel):
