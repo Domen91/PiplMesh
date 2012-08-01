@@ -143,6 +143,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'piplmesh.frontend.context_processors.global_vars',
+    'django_browserid.context_processors.browserid_form',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -179,6 +180,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_browserid',
 
     'pushserver',
     'djcelery',
@@ -267,6 +269,7 @@ LOGGING = {
 }
 
 LOGIN_REDIRECT_URL = '/'
+BROWSERID_CREATE_USER = True
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
 
@@ -277,6 +280,7 @@ AUTHENTICATION_BACKENDS = (
     'piplmesh.account.backends.FoursquareBackend',
     'piplmesh.account.backends.GoogleBackend',
     'piplmesh.account.backends.LazyUserBackend',
+    'django_browserid.auth.BrowserIDBackend',
 )
 
 TEST_RUNNER = 'piplmesh.test_runner.MongoEngineTestSuiteRunner'
