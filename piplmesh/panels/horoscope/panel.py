@@ -7,18 +7,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from piplmesh import panels
 
-from . import providers, models
+from . import models, providers
+
+HOROSCOPE_DATE_TOO_OLD = 2
 
 class HoroscopePanel(panels.BasePanel):
     def get_context(self, context):
         user = context['user']
-
-        horoscope_forecast = ''
-        horoscope_source_name = ''
-        horoscope_source_url = ''
-        horoscope_sign = ''
-        horoscope_date = ''
-        horoscope_date_string = ''
 
         context.update({
             'header': _("Today's horoscope"),
@@ -30,7 +25,9 @@ class HoroscopePanel(panels.BasePanel):
             })
             return context
 
-        if translation.get_language() not in providers.get_supported_languages():
+        try:
+            provider = providers.get_provider(translation.get_language())
+        except:
             context.update({
                 'error_language': True,
             })
@@ -38,10 +35,16 @@ class HoroscopePanel(panels.BasePanel):
 
         user_sign = providers.get_horoscope_sign(user.birthdate.day, user.birthdate.month)
 
-        horoscope = models.Horoscope.objects(
-            sign = user_sign,
-            language = user.language
-        )
+        try:
+            horoscope = models.Horoscope.objects.get(
+                sign = user_sign,
+                language = translation.get_language()
+            )
+        except DoesNotExist:
+            context.update({
+                'error_data': True,
+            })
+            return context
 
         if not horoscope:
             context.update({
@@ -49,24 +52,18 @@ class HoroscopePanel(panels.BasePanel):
             })
             return context
 
-        if datetime.datetime.now() > (horoscope[0].date + datetime.timedelta(days=2)):
+        if datetime.datetime.now() > (horoscope.date + datetime.timedelta(days=HOROSCOPE_DATE_TOO_OLD)):
             context.update({
-                'error_date': True,
+                'error_obsolete': True,
             })
             return context
 
-        horoscope_forecast = horoscope[0].forecast
-        horoscope_source_name = providers.get_provider(user.language).get_source_name()
-        horoscope_source_url = providers.get_provider(user.language).get_source_url()
-        horoscope_sign = providers.HOROSCOPE_SIGNS_DICT[user_sign]
-        horoscope_date = horoscope[0].date
-
         context.update({
-            'horoscope_forecast': horoscope_forecast,
-            'horoscope_sign': horoscope_sign,
-            'horoscope_date': horoscope_date,
-            'horoscope_source_name': horoscope_source_name,
-            'horoscope_source_url': horoscope_source_url,
+            'horoscope_forecast': horoscope.forecast,
+            'horoscope_sign': models.HOROSCOPE_SIGNS_DICT[user_sign],
+            'horoscope_date': horoscope.date,
+            'horoscope_source_name': provider.get_source_name(),
+            'horoscope_source_url': provider.get_source_url(),
         })
 
         return context

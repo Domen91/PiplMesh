@@ -8,8 +8,6 @@ from django.utils import encoding
 
 from . import models
 
-HOROSCOPE_SIGNS_DICT = dict(models.HOROSCOPE_SIGNS)
-
 def get_horoscope_sign(day, month):
     """
     Based on date, returns horoscope sign key.
@@ -131,7 +129,7 @@ class HoroscopeProviderBase(object):
 
         return self.source_name
 
-    def get_source_url(self, ):
+    def get_source_url(self):
         """
         Returns provider's source URL.
         """
@@ -244,15 +242,15 @@ class SlovenianHoroscope(HoroscopeProviderBase):
 
     def fetch_data(self, sign):
         horoscope_url = '%slifestyle/astro/%s' % (self.source_url, self.provider_sign_names[sign])
-        horoscope_xml = urllib.urlopen(horoscope_url).read()
+        horoscope_html = urllib.urlopen(horoscope_url).read()
 
         search_start_date = '<span class="views-label views-label-field-horoscope-content-general">HOROSKOP ZA '
         search_end_date = ': </span>    <strong class="field-content">'
 
-        index_line_date = horoscope_xml.find(search_start_date)
+        index_line_date = horoscope_html.find(search_start_date)
         index_start_date = index_line_date+len(search_start_date)
-        index_end_date = horoscope_xml.find(search_end_date)
-        date_string_html = horoscope_xml[index_start_date:index_end_date]
+        index_end_date = horoscope_html.find(search_end_date)
+        date_string_html = horoscope_html[index_start_date:index_end_date]
         date_string_day = re.sub(r'\D', '', date_string_html)
         date_string_month = re.sub('^[0-9\. ]+', '', date_string_html)
         date_string_year = datetime.datetime.now().year
@@ -263,10 +261,10 @@ class SlovenianHoroscope(HoroscopeProviderBase):
         search_start_string = '<strong class="field-content">'
         search_end_string = '</strong>  </div>  </div>'
 
-        index_line = horoscope_xml.find(search_start_string)
+        index_line = horoscope_html.find(search_start_string)
         index_start = index_line+len(search_start_string)
-        index_end = horoscope_xml.find(search_end_string)
-        forecast = horoscope_xml[index_start:index_end]
+        index_end = horoscope_html.find(search_end_string)
+        forecast = horoscope_html[index_start:index_end]
 
         return {
             'date': date,

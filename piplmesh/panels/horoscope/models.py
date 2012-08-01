@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 import mongoengine
@@ -19,8 +18,10 @@ HOROSCOPE_SIGNS = (
     ('aquarius', _("Aquarius")),
 )
 
+HOROSCOPE_SIGNS_DICT = dict(HOROSCOPE_SIGNS)
+
 class Horoscope(mongoengine.Document):
     sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS, required=True)
-    language = mongoengine.StringField(choices=settings.LANGUAGES, required=True)
+    language = mongoengine.StringField(choices=settings.LANGUAGES, required=True, unique_with='sign')
     forecast = mongoengine.StringField(required=True)
     date = mongoengine.DateTimeField(required=True)
