@@ -15,4 +15,4 @@ def update_horoscope():
         for sign in models.HOROSCOPE_SIGNS_DICT:
             horoscope_data = horoscope_provider.fetch_data(sign)
 
-            models.Horoscope.objects(language=horoscope_provider.get_language(), sign=sign).update(set__forecast=horoscope_data['forecast'], set__date=horoscope_data['date'], upsert=True)
+            models.Horoscope.objects(language=horoscope_provider.get_language(), sign=sign, date=horoscope_data['date']).update(set__forecast=horoscope_data['forecast'], upsert=True)

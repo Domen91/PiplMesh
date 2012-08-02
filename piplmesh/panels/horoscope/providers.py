@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 import datetime, re, urllib
 
+from lxml import etree, html
 from xml.dom import minidom
 
 from django.utils import encoding
@@ -164,42 +165,30 @@ class EnglishHoroscope(HoroscopeProviderBase):
     }
     
     provider_month_names = {
-        'January': 'January',
-        'February': 'February',
-        'March': 'March',
-        'April': 'April',
-        'May': 'May',
-        'June': 'June',
-        'July': 'July',
-        'August': 'August',
-        'September': 'September',
-        'October': 'October',
-        'November': 'November',
-        'December': 'December',
+        'January': 1,
+        'February': 2,
+        'March': 3,
+        'April': 4,
+        'May': 5,
+        'June': 6,
+        'July': 7,
+        'August': 8,
+        'September': 9,
+        'October': 10,
+        'November': 11,
+        'December': 12,
     }
 
     def fetch_data(self, sign):
         horoscope_url = '%srss/dailyhoroscope-feed.asp?sign=%s' % (self.source_url, self.provider_sign_names[sign])
-        horoscope_xml = minidom.parse(urllib.urlopen(horoscope_url))
+        horoscope_xml_tree = etree.parse(horoscope_url)
+
+        date_string = re.compile(r'(\w+)\s+(\d+),\s+(\d+)$').search(horoscope_xml_tree.findtext('.//item/title'))
 
         return {
-            'date': self.date_parsing(horoscope_xml, sign),
-            'forecast': encoding.smart_unicode(self.forecast_parsing(horoscope_xml)),
+            'date': datetime.date(date_string.group(3), provider_month_names[date_string.group(1)], date_string.group(2)),
+            'forecast': horoscope_xml_tree.findtext('.//item/description'),
         }
-
-    def date_parsing(self, xml, sign):
-        date_string_text = xml.getElementsByTagName('title')[1].firstChild.data
-        date_string_text = date_string_text.replace(self.provider_sign_names[sign] + ' Horoscope for ', '')
-        date_string_day = re.findall(r'\d{1,2}', date_string_text)[0]
-        date_string_month = re.sub('[0-9, ]', '', re.sub(r'\w{5,10}, ', '', date_string_text))
-        date_string_year = re.findall(r'\d{4}', date_string_text)[0]
-        date_string = '%s. %s %s' % (date_string_day, self.provider_month_names[date_string_month], date_string_year)
-        date = datetime.datetime.strptime(date_string, '%d. %B %Y')
-
-        return date
-
-    def forecast_parsing(self, xml):
-        return xml.getElementsByTagName('description')[1].firstChild.data
 
 class SlovenianHoroscope(HoroscopeProviderBase):
     """
@@ -226,49 +215,30 @@ class SlovenianHoroscope(HoroscopeProviderBase):
     }
 
     provider_month_names = {
-        'januar': 'January',
-        'februar': 'February',
-        'marec': 'March',
-        'april': 'April',
-        'maj': 'May',
-        'junij': 'June',
-        'julij': 'July',
-        'avgust': 'August',
-        'september': 'September',
-        'oktober': 'October',
-        'november': 'November',
-        'december': 'December',
+        'januar': 1,
+        'februar': 2,
+        'marec': 3,
+        'april': 4,
+        'maj': 5,
+        'junij': 6,
+        'julij': 7,
+        'avgust': 8,
+        'september': 9,
+        'oktober': 10,
+        'november': 11,
+        'december': 12,
     }
 
     def fetch_data(self, sign):
         horoscope_url = '%slifestyle/astro/%s' % (self.source_url, self.provider_sign_names[sign])
-        horoscope_html = urllib.urlopen(horoscope_url).read()
+        horoscope_html_tree = html.parse(horoscope_url)
 
-        search_start_date = '<span class="views-label views-label-field-horoscope-content-general">HOROSKOP ZA '
-        search_end_date = ': </span>    <strong class="field-content">'
-
-        index_line_date = horoscope_html.find(search_start_date)
-        index_start_date = index_line_date+len(search_start_date)
-        index_end_date = horoscope_html.find(search_end_date)
-        date_string_html = horoscope_html[index_start_date:index_end_date]
-        date_string_day = re.sub(r'\D', '', date_string_html)
-        date_string_month = re.sub('^[0-9\. ]+', '', date_string_html)
-        date_string_year = datetime.datetime.now().year
-        date_string = '%s. %s %s' % (date_string_day, self.provider_month_names[date_string_month], date_string_year)
-
-        date = datetime.datetime.strptime(date_string, '%d. %B %Y')
-
-        search_start_string = '<strong class="field-content">'
-        search_end_string = '</strong>  </div>  </div>'
-
-        index_line = horoscope_html.find(search_start_string)
-        index_start = index_line+len(search_start_string)
-        index_end = horoscope_html.find(search_end_string)
-        forecast = horoscope_html[index_start:index_end]
+        date_html_string = tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//span')
+        date_string = re.compile(r'(\w+)\s+(\w+)\s+(\d+).\s+(\w+):\s+$')
 
         return {
-            'date': date,
-            'forecast': encoding.smart_unicode(forecast),
+            'date': datetime.date(datetime.datetime.now().year, provider_month_name[date_string.group(4)], date_string.group(3)),
+            'forecast': encoding.smart_unicode(tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//strong')),
         }
 
 HOROSCOPE_PROVIDERS = (

@@ -13,7 +13,7 @@ HOROSCOPE_DATE_TOO_OLD = 2
 
 class HoroscopePanel(panels.BasePanel):
     def get_context(self, context):
-        user = context['user']
+        user = self.request.user
 
         context.update({
             'header': _("Today's horoscope"),
@@ -27,7 +27,7 @@ class HoroscopePanel(panels.BasePanel):
 
         try:
             provider = providers.get_provider(translation.get_language())
-        except:
+        except KeyError:
             context.update({
                 'error_language': True,
             })
@@ -36,23 +36,17 @@ class HoroscopePanel(panels.BasePanel):
         user_sign = providers.get_horoscope_sign(user.birthdate.day, user.birthdate.month)
 
         try:
-            horoscope = models.Horoscope.objects.get(
-                sign = user_sign,
-                language = translation.get_language()
-            )
-        except DoesNotExist:
+            horoscope = models.Horoscope.objects(
+                sign=user_sign,
+                language=translation.get_language(),
+            ).order_by('-date').first()
+        except models.Horoscope.DoesNotExist:
             context.update({
                 'error_data': True,
             })
             return context
 
-        if not horoscope:
-            context.update({
-                'error_data': True,
-            })
-            return context
-
-        if datetime.datetime.now() > (horoscope.date + datetime.timedelta(days=HOROSCOPE_DATE_TOO_OLD)):
+        if datetime.datetime.now() > horoscope.date + datetime.timedelta(days=HOROSCOPE_DATE_TOO_OLD):
             context.update({
                 'error_obsolete': True,
             })
