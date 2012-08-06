@@ -21,7 +21,10 @@ HOROSCOPE_SIGNS = (
 HOROSCOPE_SIGNS_DICT = dict(HOROSCOPE_SIGNS)
 
 class Horoscope(mongoengine.Document):
-    sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS, required=True)
-    language = mongoengine.StringField(choices=settings.LANGUAGES, required=True, unique_with=('sign', 'date'))
+    date = mongoengine.DateTimeField(required=True, unique_with=('language', 'sign'))
+    language = mongoengine.StringField(choices=settings.LANGUAGES, required=True, unique_with=('date', 'sign'))
+    sign = mongoengine.StringField(choices=HOROSCOPE_SIGNS, required=True, unique_with=('date', 'language'))
     forecast = mongoengine.StringField(required=True)
-    date = mongoengine.DateTimeField(required=True, unique_with=('sign', 'language'))
+    meta = {
+        'indexes': ['date', 'language', 'sign']
+    }

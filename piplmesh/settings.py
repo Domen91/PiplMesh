@@ -172,6 +172,7 @@ INSTALLED_APPS = (
     'piplmesh.nodes',
     'piplmesh.utils',
     'piplmesh.panels',
+    'piplmesh.panels.horoscope',
 
     'django.contrib.messages',
     'django.contrib.sessions',

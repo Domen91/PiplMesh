@@ -9,7 +9,7 @@ from piplmesh import panels
 
 from . import models, providers
 
-HOROSCOPE_DATE_TOO_OLD = 2
+HOROSCOPE_OBSOLETE = 2
 
 class HoroscopePanel(panels.BasePanel):
     def get_context(self, context):
@@ -37,16 +37,22 @@ class HoroscopePanel(panels.BasePanel):
 
         try:
             horoscope = models.Horoscope.objects(
-                sign=user_sign,
                 language=translation.get_language(),
+                sign=user_sign,
             ).order_by('-date').first()
         except models.Horoscope.DoesNotExist:
             context.update({
                 'error_data': True,
             })
             return context
+        
+        if horoscope is None:
+            context.update({
+                'error_data': True,
+            })
+            return context
 
-        if datetime.datetime.now() > horoscope.date + datetime.timedelta(days=HOROSCOPE_DATE_TOO_OLD):
+        if datetime.datetime.now() > horoscope.date + datetime.timedelta(days=HOROSCOPE_OBSOLETE):
             context.update({
                 'error_obsolete': True,
             })

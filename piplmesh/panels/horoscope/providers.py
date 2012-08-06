@@ -1,11 +1,13 @@
 from __future__ import absolute_import
 
-import datetime, re, urllib
+import datetime, re
 
 from lxml import etree, html
-from xml.dom import minidom
 
 from django.utils import encoding
+
+PATTERN_DATE_EN = r'(\w+)\s+(\d+),\s+(\d+)$'
+PATTERN_DATE_SI = r'(\d+).\s+(\w+):\s+$'
 
 from . import models
 
@@ -181,13 +183,13 @@ class EnglishHoroscope(HoroscopeProviderBase):
 
     def fetch_data(self, sign):
         horoscope_url = '%srss/dailyhoroscope-feed.asp?sign=%s' % (self.source_url, self.provider_sign_names[sign])
-        horoscope_xml_tree = etree.parse(horoscope_url)
+        horoscope_tree = etree.parse(horoscope_url)
 
-        date_string = re.compile(r'(\w+)\s+(\d+),\s+(\d+)$').search(horoscope_xml_tree.findtext('.//item/title'))
+        date_string = re.compile(PATTERN_DATE_EN).search(horoscope_tree.findtext('.//item/title'))
 
         return {
-            'date': datetime.date(date_string.group(3), provider_month_names[date_string.group(1)], date_string.group(2)),
-            'forecast': horoscope_xml_tree.findtext('.//item/description'),
+            'date': datetime.date(int(date_string.group(3)), self.provider_month_names[date_string.group(1)], int(date_string.group(2))),
+            'forecast': horoscope_tree.findtext('.//item/description'),
         }
 
 class SlovenianHoroscope(HoroscopeProviderBase):
@@ -231,14 +233,14 @@ class SlovenianHoroscope(HoroscopeProviderBase):
 
     def fetch_data(self, sign):
         horoscope_url = '%slifestyle/astro/%s' % (self.source_url, self.provider_sign_names[sign])
-        horoscope_html_tree = html.parse(horoscope_url)
+        html_parser = html.HTMLParser(encoding='utf-8')
+        horoscope_tree = html.parse(horoscope_url, html_parser)
 
-        date_html_string = tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//span')
-        date_string = re.compile(r'(\w+)\s+(\w+)\s+(\d+).\s+(\w+):\s+$')
+        date_parsed = re.compile(PATTERN_DATE_SI).search(horoscope_tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//span'))
 
         return {
-            'date': datetime.date(datetime.datetime.now().year, provider_month_name[date_string.group(4)], date_string.group(3)),
-            'forecast': encoding.smart_unicode(tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//strong')),
+            'date': datetime.date(datetime.datetime.now().year, self.provider_month_names[date_parsed.group(2)], int(date_parsed.group(1))),
+            'forecast': horoscope_tree.findtext('.//div[@id="horoscope-sign-right"]//div[@class="view-content"]//strong'),
         }
 
 HOROSCOPE_PROVIDERS = (
