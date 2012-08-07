@@ -16,12 +16,12 @@
         {% else %}
             <span class="horoscope_info">{{ horoscope_sign }}</span><br />
             <span class="horoscope_forecast">{{ horoscope_forecast }}</span><br />
-            {% blocktrans with date=horoscope_date|date:"DATE_FORMAT" title="Data" %}
-                <span class="horoscope_date">{{ title }}: {{ date }}</span>
+            {% blocktrans with date=horoscope_date|date:"DATE_FORMAT" %}
+                <span class="horoscope_date">Date: {{ date }}</span>
             {% endblocktrans %}
             <br />
-            {% blocktrans with url=horoscope_source_url url_name=horoscope_source_name title="Source" %}
-                <span class="horoscope_url">{{ title }}: <a href="{{ url }}">{{ url_name }}</a></span>
+            {% blocktrans with url=horoscope_source_url url_name=horoscope_source_name %}
+                <span class="horoscope_url">Source: <a href="{{ url }}">{{ url_name }}</a></span>
             {% endblocktrans %}
         {% endif %}
     </div>

@@ -7,9 +7,13 @@ class Command(BaseCommand):
         """
         Manually update horoscopes with manage.py command.
         """
-
-        self.stdout.write('Start the update manually horoscopes. Please wait ...')
-        self.stdout.write('\n\r')
-        tasks.update_horoscope()
-        self.stdout.write('Successfully updated all horoscope.')
-        self.stdout.write('\n\r')
+        
+        if int(options['verbosity']) > 0:
+            self.stdout.write('Start the update manually horoscopes. Please wait ...')
+            self.stdout.write('\n\r')
+        
+        tasks.update_horoscope.delay()
+        
+        if int(options['verbosity']) > 0:
+            self.stdout.write('Successfully updated all horoscope.')
+            self.stdout.write('\n\r')

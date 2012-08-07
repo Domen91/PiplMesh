@@ -60,6 +60,8 @@ urlpatterns = patterns('',
     url(r'^user/(?P<username>' + models.USERNAME_REGEX + ')/$', frontend_views.UserView.as_view(), name='profile'),
     url(r'^account/$', account_views.AccountChangeView.as_view(), name='account'),
     url(r'^account/password/change/$', account_views.PasswordChangeView.as_view(), name='password_change'),
+    url(r'^account/confirmation/$', account_views.EmailConfirmationSendToken.as_view(), name='email_confirmation_send_token'),
+    url(r'^account/confirmation/token/(?:(?P<confirmation_token>\w+)/)?$', account_views.EmailConfirmationProcessToken.as_view(), name='email_confirmaton_process_token'),
     url(r'^account/setlanguage/$', account_views.set_language, name='set_language'),
 
     # RESTful API
@@ -69,7 +71,6 @@ urlpatterns = patterns('',
     url(r'^' + I18N_URL + 'js/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
     # Internals
-    # TODO: Limit only to internal IPs
     url(r'^' + PUSH_SERVER_URL, include('pushserver.urls')),
 )
 

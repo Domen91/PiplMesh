@@ -50,7 +50,7 @@ LANGUAGES = (
 
 URL_VALIDATOR_USER_AGENT = 'Django'
 
-SITE_ID = 1
+SITE_NAME = 'PiplMesh'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -110,6 +110,11 @@ DEFAULT_FILE_STORAGE = 'piplmesh.utils.storage.GridFSStorage'
 
 # URL prefix for internationalization URLs
 I18N_URL = '/i18n/'
+
+# List of configured IPs from which django-pushserver passthrough callbacks are allowed
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 # URL prefix for django-pushserver passthrough callbacks
 PUSH_SERVER_URL = '/passthrough/'
@@ -183,6 +188,7 @@ INSTALLED_APPS = (
     'tastypie',
     'tastypie_mongoengine',
     'sekizai',
+    'missing',
 )
 
 PUSH_SERVER = {
