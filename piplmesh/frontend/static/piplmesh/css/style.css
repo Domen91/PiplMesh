@@ -286,7 +286,7 @@ input.gsc-search-button {
 
 /* ---------------- FB LOGIN BUTTON ------------------- */
 .fb_login_button {
-    background: #29447E url('../images/fb_login_button.png');
+    background: #29447E url('../images/facebook_logo.png');
     background-repeat: no-repeat;
     cursor: pointer;
     display: inline-block;
@@ -298,7 +298,7 @@ input.gsc-search-button {
     margin: 0px;
     border: 0;
     height: 22px;
-    width: 163px;
+    width: 180px;
 }
 
 .fb_button_text {
@@ -332,7 +332,7 @@ input.gsc-search-button {
     outline: none;
     border: 1px solid #3DBCDC;
     height: 21px;
-    width: 163px;
+    width: 180px;
 }
 
 .twitter_button_text {
@@ -341,8 +341,8 @@ input.gsc-search-button {
     display: block;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     font-weight: bold;
-    padding: 2px 6px 3px 6px;
-    margin: 1px 1px 0 21px;
+    padding: 0px 6px 3px 6px;
+    margin: 1px 1px 0 18px;
     text-shadow: none;
     border: 0;
 }
@@ -364,7 +364,7 @@ input.gsc-search-button {
     line-height: 20px;
     border: 0;
     height: 22px;
-    width: 163px;
+    width: 180px;
 }
 
 .foursquare_button_text {
@@ -397,7 +397,7 @@ input.gsc-search-button {
     margin: 0px;
     border: 1px solid #0064D9;
     height: 21px;
-    width: 163px;
+    width: 180px;
 }
 
 .google_button_text {
@@ -406,7 +406,7 @@ input.gsc-search-button {
     display: block;
     font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     font-weight: bold;
-    padding: 2px 6px 3px 6px;
+    padding: 0px 6px 3px 6px;
     margin: 1px 1px 0 21px;
     text-shadow: none;
 }
@@ -432,7 +432,7 @@ input.gsc-search-button {
 #other_login_options {
     padding: 10px;
     margin-right: 300px;
-    float:right;
+    float: right;
     text-align: left;
 }
 
@@ -450,7 +450,7 @@ input.gsc-search-button {
 
 #main li {
     list-style-type: none;
-    text-align:right;
+    text-align: right;
 }
 
 .registration {
