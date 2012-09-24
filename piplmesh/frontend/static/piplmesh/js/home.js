@@ -216,10 +216,7 @@ $(document).ready(function () {
         });
     });
 
-    // TODO: Ajax request to store panels state is currently send many times while resizing, it should be send only at the end
-    $(window).resize(function (event) {
-        initializePanels();
-    });
+    $(window).resize( $.debounce( 250, initializePanels) );
 
     // Saving text from post input box
     var input_box_text = $('#post_text').val();
