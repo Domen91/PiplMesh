@@ -281,7 +281,7 @@ $(document).ready(function () {
         });
     });
 
-    $(window).resize($.debounce( 250, initializePanels));
+    $(window).resize($.debounce(250, initializePanels));
     $(window).resize(function (event) {
         initializeEmptyColumnsForPanels();
         orderPanelsDefault();
