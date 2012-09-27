@@ -281,7 +281,11 @@ $(document).ready(function () {
         });
     });
 
-    $(window).resize( $.debounce( 250, initializePanels) );
+    $(window).resize($.debounce( 250, initializePanels));
+    $(window).resize(function (event) {
+        initializeEmptyColumnsForPanels();
+        orderPanelsDefault();
+    });
 
     // Saving text from post input box
     var input_box_text = $('#post_text').val();
